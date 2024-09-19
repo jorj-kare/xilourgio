@@ -4,10 +4,10 @@
 
 <nav>
 	<a href="/"> Αρχική σελίδα</a>
-	<a href="/furnitures"> Έπιπλα</a>
-	<a href="/kichens"> Κουζίνες</a>
-	<a href="/instruments "> Μουσικά Όργανα</a>
-	<a href="/contact"> Επικοινωνία</a>
+	<a href="/epipla"> Έπιπλα</a>
+	<a href="/kouzines"> Κουζίνες</a>
+	<a href="/koufomata"> Κουφώματα</a>
+	<a href="/epikoinonia"> Επικοινωνία</a>
 </nav>
 <slot></slot>
 

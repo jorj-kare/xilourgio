@@ -13,7 +13,8 @@
 		justify-content: center;
 		background:
 			linear-gradient(to top right, #00000049, #0f030389),
-			url(hero_img.jpg) center/cover no-repeat;
+			url(https://res.cloudinary.com/dqn25bn8q/image/upload/v1725301805/xilourgio/ck1ram3yvogskveasqlf.jpg)
+				center/cover no-repeat;
 	}
 	.title-box {
 		display: flex;

@@ -3,26 +3,24 @@ import { model, Schema } from 'mongoose';
 const productSchema = new Schema({
 	category: {
 		type: String,
-		enum: ['έπιπλo', 'κουζίνα', 'κουφώματα', 'ειδικές κατασκευές'],
+		enum: [
+			'kouzines',
+			'ntoulapes',
+			'koufomata',
+			'eidikes-kataskeues',
+			'ksilo&metallo',
+			'metallikes-kataskeues'
+		],
 		require: true,
 		trim: true
 	},
 	subCategory: {
 		type: String,
-		enum: ['ντουλάπα', 'τραπέζι', 'ράφια', ''],
+		enum: ['ntoulapa', 'trapezi', 'rafia', 'bibliothiki', 'krebati', ''],
 		trim: true
 	},
-	material: {
-		type: String,
-		enum: ['ξύλο', 'μέταλλο', 'ξύλο-μέταλλο', 'άλλο']
-	},
 	description: String,
-	pictures: [
-		{
-			path: String,
-			cover: { type: Boolean, default: false }
-		}
-	]
+	pictures: [{ type: String }]
 });
 const Product = model('Product', productSchema);
 export default Product;

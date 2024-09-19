@@ -4,15 +4,12 @@ import Product from '$lib/server/models/product';
 export const POST = async ({ request }) => {
 	try {
 		const formData = await request.formData();
+
 		const newProduct = await Product.create({
 			category: formData.get('category'),
 			subCategory: formData.get('subCategory'),
-			material: formData.get('material'),
 			description: formData.get('description'),
-			pictures: {
-				path: formData.get('img'),
-				cover: formData.get('cover')
-			}
+			pictures: JSON.parse(formData.get('img'))
 		});
 		return json(
 			{ data: { newProduct } },
@@ -28,5 +25,21 @@ export const POST = async ({ request }) => {
 		}
 
 		throw error(status, err.message);
+	}
+};
+export const GET = async ({ request, url }) => {
+	try {
+		const category = url.searchParams.get('category').slice(1);
+		const products = await Product.find({ category });
+
+		return json(
+			{ products },
+			{
+				status: 200,
+				statusText: 'success'
+			}
+		);
+	} catch (err) {
+		console.log(err);
 	}
 };

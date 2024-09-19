@@ -27,6 +27,6 @@ export const POST = async ({ cookies, request }) => {
 			data: { user }
 		});
 	} catch (err) {
-		return error(err.status, { message: err.body.message, status: err.status });
+		throw error(err.status, { message: err.body.message, status: err.status });
 	}
 };

@@ -1,4 +1,16 @@
+<script>
+	import { NotificationDisplay, notifier } from '@beyonk/svelte-notifications';
+	import { page } from '$app/stores';
+	$: if ($page.form?.success) {
+		notifier.success('Έυγε νεαρέ, μόλις δημιούργησες μια νέα καταχώρηση στην βάση δεδομένων.');
+	} else if ($page.form?.error) {
+		notifier.danger($page.form.error);
+	}
+	let timeout = 10000;
+</script>
+
 <div class="container">
+	<NotificationDisplay {timeout} />
 	<form method="POST">
 		<label for="username">Όνομα χρήστη</label>
 		<input id="username" name="username" type="text" required />

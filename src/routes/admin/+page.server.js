@@ -44,7 +44,6 @@ export const actions = {
 			}
 			return { success: true };
 		} catch (err) {
-			// throw error(err.status, err?.body?.message);
 			return fail(err.status, { error: err?.body?.message });
 		}
 	}
