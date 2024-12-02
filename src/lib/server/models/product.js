@@ -7,9 +7,9 @@ const productSchema = new Schema({
 			'kouzines',
 			'ntoulapes',
 			'koufomata',
-			'eidikes-kataskeues',
-			'ksilo&metallo',
-			'metallikes-kataskeues'
+			'eidikes_kataskeues',
+			'epipla',
+			'metallikes_kataskeues'
 		],
 		require: true,
 		trim: true
