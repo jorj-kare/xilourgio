@@ -1,4 +1,4 @@
-import { error, redirect, fail } from '@sveltejs/kit';
+import { error, fail } from '@sveltejs/kit';
 import { nanoid } from 'nanoid';
 import { cloudinary } from '$lib/server/utils/cloudinary.js';
 

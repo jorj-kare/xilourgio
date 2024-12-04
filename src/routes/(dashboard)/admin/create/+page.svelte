@@ -1,0 +1,184 @@
+<script>
+	import { NotificationDisplay, notifier } from '@beyonk/svelte-notifications';
+	import { Pulse } from 'svelte-loading-spinners';
+	import { enhance } from '$app/forms';
+	import { page } from '$app/stores';
+	$: if ($page.form?.success) {
+		notifier.success('Έυγε νεαρέ, μόλις δημιούργησες μια νέα καταχώρηση στην βάση δεδομένων.');
+		submitting = false;
+	} else if ($page.form?.error) {
+		notifier.danger($page.form.error);
+	}
+	let timeout = 10000;
+	let submitting = false;
+	let files;
+	let fileInput;
+	let previewImgBox;
+	function changePosition(index, direction) {
+		const dt = new DataTransfer();
+
+		if (files) {
+			for (let i = 0; i < files.length; i++) {
+				if (i == index) {
+					dt.items.add(files[i + direction]);
+				} else if (i == index + direction) {
+					dt.items.add(files[i - direction]);
+				} else {
+					dt.items.add(files[i]);
+				}
+			}
+		}
+
+		files = dt.files;
+		fileInput.files = dt.files;
+	}
+	const previewPhoto = (e) => {
+		const files = e.target.files;
+
+		previewImgBox.innerHTML = '';
+
+		if (files) {
+			for (let i = 0; i < files.length; i++) {
+				const fileReader = new FileReader();
+
+				fileReader.onload = () => {
+					const markup = `<figure style="width:15vw; height:20vw;"><img src=${fileReader.result} style="width:100%; height:70%; object-fit:cover;" /><figcaption style="word-break:break-all;">${files[i].name}<figcaption/></figure>`;
+					previewImgBox.insertAdjacentHTML('beforeend', markup);
+				};
+				fileReader.readAsDataURL(files[i]);
+			}
+		}
+	};
+</script>
+
+<NotificationDisplay {timeout} />
+{#if submitting}
+	<div class="spinn"><Pulse color="blue"></Pulse></div>
+{/if}
+<div class="container">
+	<form
+		method="POST"
+		enctype="multipart/form-data"
+		class:submitting
+		use:enhance={() => {
+			submitting = true;
+			files = '';
+			previewImgBox.innerHTML = '';
+		}}
+	>
+		<label for="category">Κατηγορία</label>
+		<select id="category" name="category">
+			<option value="ntoulapes">Ντουλάπα</option>
+			<option value="kouzines">Κουζίνα</option>
+			<option value="koufomata">Κουφώματα</option>
+			<option value="epipla">Έπιπλα</option>
+			<option value="metallikes_kataskeues">Μεταλλικές κατασκευές</option>
+			<option value="eidikes_kataskeues">Ειδικές κατασκευές</option>
+		</select>
+		<label for="subCategory">Υποκατηγορία</label>
+		<select id="subCategory" name="subCategory">
+			<option value="">Καμία</option>
+			<option value="ntoulapa">Ντουλάπα</option>
+			<option value="trapezi">Τραπέζι</option>
+			<option value="rafia">Ράφια</option>
+			<option value="bibliothiki">Βιβλιοθήκη</option>
+			<option value="krebati">Κρεβάτι</option>
+		</select>
+		<label for="description">Περιγραφή</label>
+		<textarea name="description" id="description" rows="3"></textarea>
+		<label for="imgUploader">Φωτογραφίες</label>
+		<input
+			id="imgUploader"
+			name="img"
+			type="file"
+			multiple
+			required
+			bind:files
+			bind:this={fileInput}
+			on:change={previewPhoto}
+		/>
+
+		<button type="submit" disabled={submitting}>Καταχώρηση</button>
+	</form>
+
+	<div class="preview-img-box" bind:this={previewImgBox}></div>
+	{#if files}
+		{#each Array.from(files) as file, i}
+			<div>
+				<p>{i + 1}</p>
+				<button class="contrast outline" on:click={() => changePosition(i, -1)} disabled={i == 0}
+					>⬆️</button
+				>
+				<button
+					class="contrast outline"
+					on:click={() => changePosition(i, 1)}
+					disabled={i == files.length - 1}>⬇️</button
+				>
+				{file.name}
+			</div>
+		{/each}
+	{/if}
+</div>
+
+<style>
+	.container {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		/* align-items: center;
+		justify-items: center; */
+		padding: 10rem;
+	}
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: 1px;
+		width: 50%;
+		padding: 5rem;
+		border: 1px solid #eee;
+	}
+	label {
+		margin-top: 1.5rem;
+	}
+	button[type='submit'] {
+		margin-top: 2.5rem;
+		width: 50%;
+		align-self: center;
+		padding: 1rem 0;
+		border: none;
+		border-radius: 5px;
+		transition:
+			background-color 0.5s,
+			color 0.7s;
+	}
+	button[type='submit']:hover {
+		color: #eee;
+		background-color: rgba(14, 152, 14, 0.933);
+	}
+
+	.spinn {
+		position: absolute;
+		left: 0;
+		right: 0;
+		margin-inline: auto;
+		width: fit-content;
+		z-index: 1;
+	}
+	.submitting {
+		opacity: 0.5;
+		pointer-events: none;
+	}
+	button {
+		width: max-content;
+		display: inline-block;
+	}
+	p {
+		display: inline-block;
+	}
+	.preview-img-box {
+		display: flex;
+		gap: 2rem;
+		width: 100%;
+		padding: 3rem 0;
+	}
+</style>
