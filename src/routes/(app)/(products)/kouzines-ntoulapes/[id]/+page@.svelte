@@ -10,5 +10,5 @@
 </script>
 
 <div>
-	<Carousel images={data.products[0]} on:click={closeWindow}></Carousel>
+	<Carousel images={data.products} on:click={closeWindow}></Carousel>
 </div>

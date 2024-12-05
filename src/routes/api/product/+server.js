@@ -30,16 +30,12 @@ export const POST = async ({ request }) => {
 export const GET = async ({ url }) => {
 	try {
 		let params = {};
-		const id = url.searchParams.get('id');
 		let category = url.searchParams.get('category');
-		if (id) params = { _id: id };
-		else if (category) {
+		if (category) {
 			category = category.slice(1).split('-');
 			params = { category };
 		}
-
 		const products = await Product.find(params);
-
 		return json(
 			{ products },
 			{
