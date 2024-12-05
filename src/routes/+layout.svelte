@@ -2,7 +2,6 @@
 	import '../css/reset.css';
 </script>
 
-<div></div>
 <slot></slot>
 
 <style>

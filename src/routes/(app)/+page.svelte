@@ -76,7 +76,7 @@
 		scroll-snap-type: y mandatory;
 		height: 100vh;
 		overflow-y: scroll;
-		overflow-x: hidden;
+
 		word-spacing: -2px;
 	}
 	header {
@@ -166,28 +166,28 @@
 
 		25% {
 			background-image: linear-gradient(rgba(0, 0, 0, 0.569), rgba(0, 0, 0, 0.569)),
-				url(https://res.cloudinary.com/dqn25bn8q/image/upload/v1727469701/xilourgio/ivqqtv5lfwdimdzy7uyt.jpg);
+				url(https://res.cloudinary.com/dqn25bn8q/image/upload/v1727469701/xilourgio/fNmAyKPF9xRxSvd37UXFe.jpg);
 		}
 		49.99% {
 			background-image: linear-gradient(rgba(0, 0, 0, 0.569), rgba(0, 0, 0, 0.569)),
-				url(https://res.cloudinary.com/dqn25bn8q/image/upload/v1727469701/xilourgio/ivqqtv5lfwdimdzy7uyt.jpg);
+				url(https://res.cloudinary.com/dqn25bn8q/image/upload/v1727469701/xilourgio/fNmAyKPF9xRxSvd37UXFe.jpg);
 		}
 
 		50% {
 			background-image: linear-gradient(rgba(0, 0, 0, 0.569), rgba(0, 0, 0, 0.569)),
-				url(https://res.cloudinary.com/dqn25bn8q/image/upload/v1727469634/xilourgio/cpfkvndwxa6pr801x3cs.jpg);
+				url(https://res.cloudinary.com/dqn25bn8q/image/upload/v1727469634/xilourgio/zbmhllgruxu4su6innkf.jpg);
 		}
 		74.99% {
 			background-image: linear-gradient(rgba(0, 0, 0, 0.569), rgba(0, 0, 0, 0.569)),
-				url(https://res.cloudinary.com/dqn25bn8q/image/upload/v1727469634/xilourgio/cpfkvndwxa6pr801x3cs.jpg);
+				url(https://res.cloudinary.com/dqn25bn8q/image/upload/v1727469634/xilourgio/zbmhllgruxu4su6innkf.jpg);
 		}
 		75% {
 			background-image: linear-gradient(rgba(0, 0, 0, 0.569), rgba(0, 0, 0, 0.569)),
-				url(https://res.cloudinary.com/dqn25bn8q/image/upload/v1727469634/xilourgio/gkuddesefubp4kv6flfe.jpg);
+				url(https://res.cloudinary.com/dqn25bn8q/image/upload/v1727469634/xilourgio/fNmAyKPF9xRxSvd37UXFe.jpg);
 		}
 		99.99% {
 			background-image: linear-gradient(rgba(0, 0, 0, 0.569), rgba(0, 0, 0, 0.569)),
-				url(https://res.cloudinary.com/dqn25bn8q/image/upload/v1727469634/xilourgio/gkuddesefubp4kv6flfe.jpg);
+				url(https://res.cloudinary.com/dqn25bn8q/image/upload/v1727469634/xilourgio/fNmAyKPF9xRxSvd37UXFe.jpg);
 		}
 	}
 </style>

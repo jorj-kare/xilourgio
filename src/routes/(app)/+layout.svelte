@@ -105,9 +105,6 @@
 		width: 1em;
 		height: 1em;
 	}
-	:global(body) {
-		font-size: 1.6rem;
-	}
 
 	nav {
 		position: absolute;
