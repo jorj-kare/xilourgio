@@ -1,14 +1,32 @@
 <script>
+	import { NotificationDisplay, notifier } from '@beyonk/svelte-notifications';
+	import { invalidateAll } from '$app/navigation';
 	import { PUBLIC_CLOUDINARY_URL } from '$env/static/public';
 	import { page } from '$app/stores';
 	import IoIosAdd from 'svelte-icons/io/IoIosAdd.svelte';
 	import MdModeEdit from 'svelte-icons/md/MdModeEdit.svelte';
 	import MdDelete from 'svelte-icons/md/MdDelete.svelte';
 	export let data;
+
+	const timeout = 3000;
+	async function deleteProduct(productId) {
+		if (confirm('Εισαι σίγουρος οτι θέλεις να διαγράψεις αυτήν την καταχώρηση?') == false) return;
+		const res = await fetch(`/api/product/${productId}`, {
+			method: 'DELETE'
+		});
+		if (!res.ok) {
+			notifier.warning('Κάτι πήγε στραβά, προσπάθησε ξανά αργότερα.');
+		}
+		console.log(res);
+
+		invalidateAll();
+		notifier.success('Η καταχώριση διαγράφηκε επιτυχώς');
+	}
 </script>
 
 <nav>new<a href="/admin/create"><IoIosAdd /></a></nav>
 <div class="container">
+	<NotificationDisplay {timeout} />
 	{#each data.products as product, index}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -19,8 +37,10 @@
 				data-index={index}
 			/>
 			<div class="anchor-box">
-				<a href="{$page.url.pathname}/edit/{product._id}"> <MdModeEdit /></a>
-				<a id="delete" href="{$page.url.pathname}/delete/{product._id}"> <MdDelete /></a>
+				<a class="anchor" href="{$page.url.pathname}/edit/{product._id}"> <MdModeEdit /></a>
+				<button class="anchor" id="delete" on:click={deleteProduct(product._id)}>
+					<MdDelete /></button
+				>
 			</div>
 		</div>
 	{/each}
@@ -64,8 +84,9 @@
 
 	.container {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, 20vw);
-		grid-auto-rows: 20vw;
+		grid-template-columns: repeat(auto-fill, 15vw);
+
+		grid-auto-rows: 18vw;
 		grid-gap: 2rem;
 		justify-items: center;
 		align-items: center;
@@ -85,8 +106,8 @@
 
 	.grid-item img {
 		display: block;
-		max-width: 100%;
-		height: auto;
+		width: 100%;
+		height: 80%;
 		padding: 2px;
 		border: 4px solid rgb(5, 5, 5);
 		border-radius: 5px;
@@ -100,18 +121,23 @@
 		padding: 1rem 2rem;
 		border-top: 1px solid #e9e6e6;
 	}
-	.grid-item a {
+	.anchor-box button {
+		border: none;
+		background: transparent;
+		padding: 0;
+		color: inherit;
+	}
+	.anchor {
 		display: block;
 		width: 25px;
 		color: #e9e6e6;
 		transition: all 0.5s;
 	}
-	.grid-item a:hover {
+	.anchor:hover {
 		color: rgb(22, 173, 22);
 		cursor: pointer;
 	}
-	.grid-item #delete:hover {
+	#delete:hover {
 		color: rgb(173, 22, 52);
-		cursor: pointer;
 	}
 </style>
