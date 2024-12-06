@@ -1,6 +1,6 @@
 import { error, fail } from '@sveltejs/kit';
 import { nanoid } from 'nanoid';
-import { cloudinary } from '$lib/server/utils/cloudinary.js';
+import { cloudinary, deleteCloudinaryImages } from '$lib/server/utils/cloudinary.js';
 
 export const actions = {
 	default: async ({ request, fetch }) => {
@@ -19,6 +19,10 @@ export const actions = {
 				});
 				publicId[i] = resCloud.public_id;
 				filenames[i] = `${resCloud.public_id}.${resCloud.format}`;
+				if (resCloud.error) {
+					await deleteCloudinaryImages(publicId);
+					throw error(400, resCloud.error);
+				}
 			}
 
 			formData.set('img', JSON.stringify(filenames));
@@ -28,18 +32,10 @@ export const actions = {
 				body: formData
 			});
 			if (!res.ok) {
-				if (images.length > 0) {
-					for (let i = 0; i < images.length; i++) {
-						const resC = await cloudinary({
-							publicId: publicId[i],
-							action: 'destroy',
-							folder: 'xilourgio'
-						});
-						console.log(resC);
-					}
-				}
+				await deleteCloudinaryImages(publicId);
 
 				const resError = await res.json();
+
 				throw error(res.status, resError.message);
 			}
 			return { success: true };

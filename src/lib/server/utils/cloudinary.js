@@ -5,6 +5,19 @@ import {
 } from '$env/static/private';
 import sha256 from 'sha256';
 
+export async function deleteCloudinaryImages(publicIdArr) {
+	if (publicIdArr.length > 0) {
+		for (let i = 0; i < publicIdArr.length; i++) {
+			const resC = await cloudinary({
+				publicId: publicIdArr[i],
+				action: 'destroy',
+				folder: 'xilourgio'
+			});
+			console.log(resC);
+		}
+	}
+}
+
 export async function cloudinary({ file, publicId, action = 'upload', folder }) {
 	let signature;
 	const formData = new FormData();

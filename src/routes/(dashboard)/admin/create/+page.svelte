@@ -4,10 +4,11 @@
 	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
 	$: if ($page.form?.success) {
-		notifier.success('Έυγε νεαρέ, μόλις δημιούργησες μια νέα καταχώρηση στην βάση δεδομένων.');
+		notifier.success('Η καταχώρηση δημιουργήθηκε επιτυχώς.');
 		submitting = false;
 	} else if ($page.form?.error) {
 		notifier.danger($page.form.error);
+		submitting = false;
 	}
 	let timeout = 10000;
 	let submitting = false;

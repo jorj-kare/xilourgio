@@ -1,6 +1,6 @@
 import { error, json } from '@sveltejs/kit';
 import Product from '$lib/server/models/product';
-import { cloudinary } from '$lib/server/utils/cloudinary.js';
+import { cloudinary, deleteCloudinaryImages } from '$lib/server/utils/cloudinary.js';
 
 export const GET = async ({ params }) => {
 	try {
@@ -22,15 +22,9 @@ export const DELETE = async ({ params }) => {
 	const product = await Product.findByIdAndDelete(params.id);
 
 	if (!product) throw error(404, 'Δεν βρέθηκε αντικείμενο με αυτο το id.');
+	const publicIdArr = product.pictures.map((picture) => picture.split('.')[0]);
 
-	for (let i = 0; i < product.pictures.length; i++) {
-		const resC = await cloudinary({
-			publicId: product.pictures[i].split('.')[0],
-			action: 'destroy',
-			folder: 'xilourgio'
-		});
-		console.log(resC);
-	}
+	await deleteCloudinaryImages(publicIdArr);
 
 	return new Response(null, { status: 204 });
 };
