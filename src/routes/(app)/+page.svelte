@@ -1,5 +1,5 @@
 <script>
-	import video from '$lib/166808-835670743.mp4';
+	import video from '$lib/media/166808-835670743.mp4';
 </script>
 
 <div class="container">

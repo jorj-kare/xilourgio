@@ -1,8 +1,6 @@
 <script>
 	import GiPhone from 'svelte-icons/gi/GiPhone.svelte';
 	import MdEmail from 'svelte-icons/md/MdEmail.svelte';
-
-	import hero from '$lib/hero_img.jpg';
 </script>
 
 <main>
@@ -36,7 +34,7 @@
 		min-height: 100vh;
 		color: #e9e6e6;
 		background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-			url(../../../lib/hero_img.jpg);
+			url(../../../lib/media/hero_img.jpg);
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: center;
