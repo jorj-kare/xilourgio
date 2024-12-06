@@ -2,10 +2,10 @@
 	import { PUBLIC_CLOUDINARY_URL } from '$env/static/public';
 	export let data;
 
-	let category = data.products[0].category;
-	let subCategory = data.products[0].subCategory;
-	let description = data.products[0].description;
-	let pictures = data.products[0].pictures;
+	let category = data.products.category;
+	let subCategory = data.products.subCategory;
+	let description = data.products.description;
+	let pictures = data.products.pictures;
 </script>
 
 <div class="form-box">
@@ -35,7 +35,7 @@
 		<button type="submit">Καταχώρηση</button>
 	</form>
 	<div class="image-box">
-		{#each data.products[0].pictures as product, index}
+		{#each data.products.pictures as product, index}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
 			<div class="grid-item">
