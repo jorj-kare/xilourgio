@@ -1,16 +1,25 @@
 <script>
 	import video from '$lib/media/166808-835670743.mp4';
+	import { onMount } from 'svelte';
 	import AnimateHeader from '../../lib/AnimateHeader.svelte';
 	const imgArr = [
 		'https://res.cloudinary.com/dqn25bn8q/image/upload/v1727470059/xilourgio/56dBO1Niw2nQIQYTRukrk.jpg',
 		'https://res.cloudinary.com/dqn25bn8q/image/upload/v1727469634/xilourgio/8DEnGdTULgwPTiyaU3y-b.jpg',
 		'https://res.cloudinary.com/dqn25bn8q/image/upload/v1727469634/xilourgio/2qD__zLmvqeRN6eMyAZLa.jpg'
 	];
+	onMount(() => {
+		const videoEl = document.querySelector('video');
+		videoEl.addEventListener('timeupdate', function () {
+			if (this.currentTime >= 8) {
+				this.currentTime = 0.0;
+			}
+		});
+	});
 </script>
 
 <div class="container">
 	<header>
-		<video playsinline autoplay muted loop>
+		<video playsinline autoplay muted loop preload="true">
 			<source src={video} type="video/webm" />
 			Your browser does not support the video tag.
 		</video>
