@@ -1,58 +1,29 @@
 <script>
+	import PreviewImgInput from '$lib/PreviewImgInput.svelte';
+	import SortingImages from '$lib/SortingImages.svelte';
 	import { NotificationDisplay, notifier } from '@beyonk/svelte-notifications';
 	import { Pulse } from 'svelte-loading-spinners';
 	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
-	$: if ($page.form?.success) {
-		notifier.success('Η καταχώρηση δημιουργήθηκε επιτυχώς.');
-		submitting = false;
-	} else if ($page.form?.error) {
-		notifier.danger($page.form.error);
-		submitting = false;
-	}
-	let timeout = 10000;
+
+	let timeout = 5000;
 	let submitting = false;
 	let files;
 	let fileInput;
-	let previewImgBox;
-	function changePosition(index, direction) {
-		const dt = new DataTransfer();
+	console.log($page);
 
-		if (files) {
-			for (let i = 0; i < files.length; i++) {
-				if (i == index) {
-					dt.items.add(files[i + direction]);
-				} else if (i == index + direction) {
-					dt.items.add(files[i - direction]);
-				} else {
-					dt.items.add(files[i]);
-				}
-			}
-		}
-
-		files = dt.files;
-		fileInput.files = dt.files;
+	$: if ($page.form?.success && submitting) {
+		notifier.success('Η καταχώρηση δημιουργήθηκε επιτυχώς.');
+		submitting = false;
+		files = '';
+	} else if ($page.form?.error && submitting) {
+		notifier.danger($page.form.error);
+		submitting = false;
 	}
-	const previewPhoto = (e) => {
-		const files = e.target.files;
-
-		previewImgBox.innerHTML = '';
-
-		if (files) {
-			for (let i = 0; i < files.length; i++) {
-				const fileReader = new FileReader();
-
-				fileReader.onload = () => {
-					const markup = `<figure style="width:15vw; height:20vw;"><img src=${fileReader.result} style="width:100%; height:70%; object-fit:cover;" /><figcaption style="word-break:break-all;">${files[i].name}<figcaption/></figure>`;
-					previewImgBox.insertAdjacentHTML('beforeend', markup);
-				};
-				fileReader.readAsDataURL(files[i]);
-			}
-		}
-	};
 </script>
 
 <NotificationDisplay {timeout} />
+
 {#if submitting}
 	<div class="spinn"><Pulse color="blue"></Pulse></div>
 {/if}
@@ -63,8 +34,6 @@
 		class:submitting
 		use:enhance={() => {
 			submitting = true;
-			files = '';
-			previewImgBox.innerHTML = '';
 		}}
 	>
 		<label for="category">Κατηγορία</label>
@@ -96,29 +65,15 @@
 			required
 			bind:files
 			bind:this={fileInput}
-			on:change={previewPhoto}
 		/>
 
 		<button type="submit" disabled={submitting}>Καταχώρηση</button>
 	</form>
 
-	<div class="preview-img-box" bind:this={previewImgBox}></div>
-	{#if files}
-		{#each Array.from(files) as file, i}
-			<div>
-				<p>{i + 1}</p>
-				<button class="contrast outline" on:click={() => changePosition(i, -1)} disabled={i == 0}
-					>⬆️</button
-				>
-				<button
-					class="contrast outline"
-					on:click={() => changePosition(i, 1)}
-					disabled={i == files.length - 1}>⬇️</button
-				>
-				{file.name}
-			</div>
-		{/each}
-	{/if}
+	{#key files}
+		<PreviewImgInput {files} />
+		<SortingImages {files} />
+	{/key}
 </div>
 
 <style>
@@ -168,18 +123,5 @@
 	.submitting {
 		opacity: 0.5;
 		pointer-events: none;
-	}
-	button {
-		width: max-content;
-		display: inline-block;
-	}
-	p {
-		display: inline-block;
-	}
-	.preview-img-box {
-		display: flex;
-		gap: 2rem;
-		width: 100%;
-		padding: 3rem 0;
 	}
 </style>
