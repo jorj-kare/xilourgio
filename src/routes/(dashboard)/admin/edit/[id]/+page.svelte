@@ -182,7 +182,7 @@
 								{/each}
 							</select>
 
-							<button id="deleteImg" on:click={deleteImg(path)}><MdDelete /></button>
+							<button type="button" id="deleteImg" on:click={deleteImg(path)}><MdDelete /></button>
 						</div>
 					{/each}
 				{/key}

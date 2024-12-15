@@ -1,49 +1,38 @@
 <script>
-	import { NotificationDisplay, notifier } from '@beyonk/svelte-notifications';
-	import { invalidateAll } from '$app/navigation';
+	import { NotificationDisplay } from '@beyonk/svelte-notifications';
+	import { deleteProduct } from '$lib/public-utils/deleteProduct.js';
 	import { PUBLIC_CLOUDINARY_URL } from '$env/static/public';
 	import { page } from '$app/stores';
 	import IoIosAdd from 'svelte-icons/io/IoIosAdd.svelte';
 	import MdModeEdit from 'svelte-icons/md/MdModeEdit.svelte';
 	import MdDelete from 'svelte-icons/md/MdDelete.svelte';
+
 	export let data;
-
 	const timeout = 3000;
-	async function deleteProduct(productId) {
-		if (confirm('Εισαι σίγουρος οτι θέλεις να διαγράψεις αυτήν την καταχώρηση?') == false) return;
-		const res = await fetch(`/api/product/${productId}`, {
-			method: 'DELETE'
-		});
-		if (!res.ok) {
-			notifier.warning('Κάτι πήγε στραβά, προσπάθησε ξανά αργότερα.');
-		}
-		console.log(res);
-
-		invalidateAll();
-		notifier.success('Η καταχώριση διαγράφηκε επιτυχώς');
-	}
 </script>
 
 <nav>new<a href="/admin/create"><IoIosAdd /></a></nav>
 <div class="container">
 	<NotificationDisplay {timeout} />
-	{#each data.products as product, index}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<div class="grid-item">
-			<img
-				src={PUBLIC_CLOUDINARY_URL + product.pictures[0]}
-				alt={product.description}
-				data-index={index}
-			/>
-			<div class="anchor-box">
-				<a class="anchor" href="{$page.url.pathname}/edit/{product._id}"> <MdModeEdit /></a>
-				<button class="anchor" id="delete" on:click={deleteProduct(product._id)}>
-					<MdDelete /></button
-				>
+	{#key data}
+		{#each data.products as product, index}
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<!-- svelte-ignore a11y-no-static-element-interactions -->
+			<div class="grid-item">
+				<img
+					src={PUBLIC_CLOUDINARY_URL + product.pictures[0]}
+					alt={product.description}
+					data-index={index}
+				/>
+				<div class="anchor-box">
+					<a class="anchor" href="{$page.url.pathname}/edit/{product._id}"> <MdModeEdit /></a>
+					<button class="anchor" id="delete" on:click={deleteProduct(product._id)}>
+						<MdDelete /></button
+					>
+				</div>
 			</div>
-		</div>
-	{/each}
+		{/each}
+	{/key}
 </div>
 
 <style>

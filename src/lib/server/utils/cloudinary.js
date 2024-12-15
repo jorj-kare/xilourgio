@@ -4,9 +4,33 @@ import {
 	CLOUDINARY_API_SECRET
 } from '$env/static/private';
 import sha256 from 'sha256';
+import { nanoid } from 'nanoid';
+
+export async function uploadToCloudinary(images) {
+	let publicId = [];
+	let filenames = [];
+	if (images.length > 0) {
+		for (let i = 0; i < images.length; i++) {
+			const resCloud = await cloudinary({
+				publicId: nanoid(),
+				file: images[i],
+				action: 'upload',
+				folder: 'xilourgio'
+			});
+
+			publicId[i] = resCloud.public_id;
+			filenames[i] = `${resCloud.public_id}.${resCloud.format}`;
+			if (resCloud.error) {
+				await deleteCloudinaryImages(publicId);
+				return { error: resCloud.error };
+			}
+		}
+		return { publicId, filenames };
+	}
+}
 
 export async function deleteCloudinaryImages(publicIdArr) {
-	if (publicIdArr.length > 0) {
+	if (publicIdArr?.length > 0) {
 		for (let i = 0; i < publicIdArr.length; i++) {
 			const resC = await cloudinary({
 				publicId: publicIdArr[i],
@@ -14,6 +38,9 @@ export async function deleteCloudinaryImages(publicIdArr) {
 				folder: 'xilourgio'
 			});
 			console.log(resC);
+			if (resC.result == 'not found') {
+				return { error: { message: 'image not found' } };
+			}
 		}
 	}
 }

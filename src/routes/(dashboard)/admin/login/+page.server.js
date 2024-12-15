@@ -8,7 +8,6 @@ export const actions = {
 			body: formData
 		});
 		const resJson = await res.json();
-		console.log(resJson, 222);
 
 		if (!res.ok)
 			throw error(res.status, {
