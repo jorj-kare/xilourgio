@@ -23,6 +23,7 @@ export const PATCH = async ({ params, request }) => {
 		const newImgs = formData.getAll('newImg');
 		const deletedImg = formData.get('deletedImg');
 		const orderedImgs = formData.getAll('orderedImgs');
+		const categoryIndex = formData.get('categoryIndex');
 		let data;
 
 		if (orderedImgs.length > 0) {
@@ -48,6 +49,12 @@ export const PATCH = async ({ params, request }) => {
 				throw error(400, cloudRes.error.message);
 			}
 			data = { $push: { pictures: cloudRes.filenames } };
+		} else if (categoryIndex) {
+			data = {
+				$set: {
+					categoryIndex: categoryIndex
+				}
+			};
 		} else {
 			data = {
 				$set: {

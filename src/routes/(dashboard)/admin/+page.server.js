@@ -1,4 +1,4 @@
-export const load = async ({ fetch, url }) => {
+export const load = async ({ fetch }) => {
 	try {
 		const res = await fetch(`/api/product`);
 
