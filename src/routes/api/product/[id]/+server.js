@@ -60,7 +60,8 @@ export const PATCH = async ({ params, request }) => {
 				$set: {
 					category: formData.get('category'),
 					subCategory: formData.get('subCategory'),
-					description: formData.get('description')
+					description: formData.get('description'),
+					descriptionEn: formData.get('descriptionEn')
 				}
 			};
 		}

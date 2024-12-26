@@ -4,7 +4,7 @@
 	import { fade } from 'svelte/transition';
 	import FaArrowRight from 'svelte-icons/fa/FaArrowRight.svelte';
 	import FaArrowLeft from 'svelte-icons/fa/FaArrowLeft.svelte';
-
+	import { lng } from '$stores';
 	export let images;
 
 	let currentSlideItem = 0;
@@ -29,7 +29,7 @@
 			<img
 				in:fade={{ duration: 1000 }}
 				src={PUBLIC_CLOUDINARY_URL + item}
-				alt={images.description}
+				alt={$lng == 'gr' ? images.description : images.descriptionEn}
 				width={1000}
 				height={600}
 			/>
@@ -39,7 +39,7 @@
 			<button class="btn-right" on:click={() => nextImage()}><FaArrowRight /></button>
 		</div>
 	</figure>
-	<p>{images.description}</p>
+	<p>{$lng == 'gr' ? images.description : images.descriptionEn}</p>
 </div>
 
 <style>

@@ -1,4 +1,8 @@
-<h1>Κουφώματα</h1>
+<script>
+	import { lng } from '$stores';
+</script>
+
+<h1>{$lng == 'gr' ? ' Κουφώματα' : 'Frames'}</h1>
 
 <style>
 	h1 {

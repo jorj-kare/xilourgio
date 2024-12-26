@@ -18,6 +18,7 @@
 	let category = data.products.category;
 	let subCategory = data.products.subCategory;
 	let description = data.products.description;
+	let descriptionEn = data.products.descriptionEn;
 
 	$: if ($page.form?.success && submitting) {
 		notifier.success('Η καταχώρηση ενημερώθηκε επιτυχώς.');
@@ -93,7 +94,6 @@
 
 		notifier.success('Οι φωτογραφίες άλλαξαν σειρά επιτυχώς');
 	}
-
 	$: {
 		if (data.products.pictures.length != orderedImgs.length) {
 			orderedImgs = [...data.products.pictures];
@@ -147,6 +147,9 @@
 				</select>
 				<label for="description">Περιγραφή</label>
 				<textarea bind:value={description} name="description" id="description" rows="3"></textarea>
+				<label for="description">Περιγραφή(Αγγλικά)</label>
+				<textarea bind:value={descriptionEn} name="descriptionEn" id="descriptionEn" rows="3"
+				></textarea>
 				<button type="submit">Καταχώρηση</button>
 			</fieldset>
 		{/key}
@@ -239,6 +242,17 @@
 	button:hover {
 		background-color: #127714;
 		color: #eee;
+	}
+	select {
+		background: #12121262;
+		padding: 1rem;
+		border: 1px solid #fefdfd;
+		border-radius: 5px;
+		color: #fefdfd;
+		opacity: 1;
+	}
+	select * {
+		background-color: black;
 	}
 	.image-box {
 		display: grid;

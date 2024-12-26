@@ -1,25 +1,38 @@
 <script>
 	import GiPhone from 'svelte-icons/gi/GiPhone.svelte';
 	import MdEmail from 'svelte-icons/md/MdEmail.svelte';
+	import IoLogoInstagram from 'svelte-icons/io/IoLogoInstagram.svelte';
+	import IoLogoFacebook from 'svelte-icons/io/IoLogoFacebook.svelte';
+	import { lng, contact } from '$stores';
 </script>
 
 <main>
 	<div class="container">
-		<h1>Επικοινωνία με το Ξυλουργείο μας</h1>
+		<h1>{$lng == 'gr' ? $contact.title.gr : $contact.title.en}</h1>
 		<h2>
-			Είμαστε στη διάθεσή σας για οποιαδήποτε ερώτηση ή αίτημα σχετικά με τις ξυλουργικές υπηρεσίες
-			μας. Είτε χρειάζεστε κατασκευή, επισκευή ή προσαρμογή ξύλινων αντικειμένων, το εξειδικευμένο
-			προσωπικό μας είναι έτοιμο να σας βοηθήσει.
+			{$lng == 'gr' ? $contact.text.gr : $contact.text.en}
 		</h2>
-		<div class="border"></div>
+
 		<div class="contact">
 			<div>
 				<div class="icon"><GiPhone /></div>
-				<span>6942823945</span>
+				<span>+306951400110</span>
 			</div>
-			<div>
+			<div class="link-box">
 				<div class="icon"><MdEmail /></div>
-				<a href="mailto:perdikisAE@gmail.com">perdikisAE@gmail.com</a>
+				<a href="mailto:apostolisper@gmail.com">apostolisper@gmail.com</a>
+			</div>
+			<div class="link-box">
+				<div class="icon"><IoLogoInstagram /></div>
+				<a href="https://www.instagram.com/apostolisper">Instagram</a>
+			</div>
+			<div class="link-box">
+				<div class="icon"><IoLogoFacebook /></div>
+				<a
+					target="_blank"
+					href="https://www.facebook.com/people/%CE%95%CF%80%CE%B9%CF%80%CE%BB%CE%BF%CF%80%CE%BF%CE%B9%CE%B5%CE%AF%CE%BF-%CE%9F%CF%81%CE%B3%CE%B1%CE%BD%CE%BF%CF%80%CE%BF%CE%B9%CE%B5%CE%AF%CE%BF-%CE%91-%CE%A0%CE%B5%CF%81%CE%B4%CE%AF%CE%BA%CE%B7%CF%82/100064016025560/"
+					>Facebook</a
+				>
 			</div>
 		</div>
 	</div>
@@ -51,8 +64,10 @@
 	}
 	.contact {
 		align-self: flex-start;
-		gap: 5rem;
 		display: flex;
+		justify-content: flex-start;
+		gap: 5rem;
+		width: 70vw;
 		padding: 2rem 0px;
 		font-size: 2.2rem;
 	}
@@ -81,5 +96,15 @@
 		width: 50px;
 		padding-right: 1rem;
 		color: rgb(209, 99, 65);
+		transition: all 0.2s;
+	}
+	.link-box a {
+		transition: all 0.2s 0.1s;
+	}
+	.link-box:hover .icon {
+		transform: scale(1.05);
+	}
+	.link-box:hover a {
+		text-shadow: 5px 5px 15px #fafafa;
 	}
 </style>

@@ -83,6 +83,8 @@
 		</select>
 		<label for="description">Περιγραφή</label>
 		<textarea name="description" id="description" rows="3"></textarea>
+		<label for="description">Περιγραφή(Αγγλικά)</label>
+		<textarea name="descriptionEn" id="descriptionEn" rows="3"></textarea>
 		<label for="imgUploader">Φωτογραφίες</label>
 		<input id="imgUploader" name="img" type="file" multiple required bind:files />
 		{#if files}
@@ -149,6 +151,17 @@
 	textarea,
 	select {
 		width: 50%;
+	}
+	select {
+		background: #12121262;
+		padding: 1rem;
+		border: 1px solid #fefdfd;
+		border-radius: 5px;
+		color: #fefdfd;
+		opacity: 1;
+	}
+	select * {
+		background-color: black;
 	}
 
 	.spinn {

@@ -20,7 +20,10 @@ const productSchema = new Schema({
 		trim: true
 	},
 	description: String,
-	pictures: [{ type: String }]
+	descriptionEn: String,
+	pictures: [{ type: String }],
+	categoryIndex: Number
 });
+
 const Product = model('Product', productSchema);
 export default Product;

@@ -1,4 +1,8 @@
-<h1>Έπιπλα | Ειδικές κατασκευές</h1>
+<script>
+	import { lng } from '$stores';
+</script>
+
+<h1>{$lng == 'gr' ? ' Έπιπλα | Ειδικές κατασκευές' : 'Furniture'}</h1>
 
 <style>
 	h1 {

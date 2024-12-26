@@ -1,7 +1,9 @@
 <script>
 	import video from '$lib/media/166808-835670743.mp4';
 	import { onMount } from 'svelte';
-	import AnimateHeader from '../../lib/AnimateHeader.svelte';
+	import AnimateHeader from '$lib/AnimateHeader.svelte';
+	import { lng, mainHeader, secondaryHeader } from '$stores';
+
 	const imgArr = [
 		'https://res.cloudinary.com/dqn25bn8q/image/upload/v1727470059/xilourgio/56dBO1Niw2nQIQYTRukrk.jpg',
 		'https://res.cloudinary.com/dqn25bn8q/image/upload/v1727469634/xilourgio/8DEnGdTULgwPTiyaU3y-b.jpg',
@@ -19,16 +21,14 @@
 
 <div class="container">
 	<header>
-		<video playsinline autoplay muted loop preload="true">
+		<video playsinline autoplay muted loop preload="true" poster={imgArr[0]}>
 			<source src={video} type="video/webm" />
 			Your browser does not support the video tag.
 		</video>
 		<div class="title-box">
-			<h1>Αποστόλης Περιδίκης</h1>
+			<h1>{$lng == 'gr' ? $mainHeader.title.gr : $mainHeader.title.en}</h1>
 			<p>
-				Αν αγαπάτε το ξύλο όσο κι εμείς, τότε είστε στο σωστό μέρος! Στο ξυλουργείο μας φτιάχνουμε
-				τα πάντα από ξύλο με μεράκι και φαντασία. Είτε χρειάζεστε κάτι μικρό, είτε μια μεγαλύτερη
-				κατασκευή, είμαστε εδώ για να το φτιάξουμε όπως ακριβώς το θέλετε!
+				{$lng == 'gr' ? $mainHeader.text.gr : $mainHeader.text.en}
 			</p>
 		</div>
 	</header>
@@ -36,53 +36,63 @@
 		<AnimateHeader imgPathArr={imgArr}>
 			<div class="info">
 				<div>
-					<h2>Τι κάνουμε</h2>
+					<h2>
+						{$lng == 'gr' ? $secondaryHeader.column1.title.gr : $secondaryHeader.column1.title.en}
+					</h2>
 					<ul>
 						<li>
-							Επί παραγγελία κατασκευές: Έπιπλα, ντουλάπες, ράφια, κουζίνες και ό,τι άλλο
-							φανταστείτε – όλα φτιαγμένα με τα χέρια μας και με μεγάλη προσοχή στη λεπτομέρεια.
+							{$lng == 'gr'
+								? $secondaryHeader.column1.text.p1.gr
+								: $secondaryHeader.column1.text.p1.en}
 						</li>
 						<li>
-							Επισκευές & ανακαινίσεις: Έχετε κάποιο παλιό έπιπλο που χρειάζεται ανανέωση; Εμείς το
-							φέρνουμε ξανά στη ζωή!
+							{$lng == 'gr'
+								? $secondaryHeader.column1.text.p2.gr
+								: $secondaryHeader.column1.text.p2.en}
 						</li>
 					</ul>
 					<p>
-						Τέλος επειδή στοχεύουμε στην ολοκληρωμένη εξυπηρέτηση σας, σας παρέχουμε τη συνεργασία
-						και την υποστήριξή μας ακόμα και μετά την πώληση.
+						{$lng == 'gr'
+							? $secondaryHeader.column1.text.p3.gr
+							: $secondaryHeader.column1.text.p3.en}
 					</p>
 				</div>
 
 				<div>
-					<h2>Γιατί να μας επιλέξετε</h2>
+					<h2>
+						{$lng == 'gr' ? $secondaryHeader.column2.title.gr : $secondaryHeader.column2.title.en}
+					</h2>
 					<ul>
 						<li>
-							Ποιότητα με προσωπικότητα: Κάθε έργο μας είναι φτιαγμένο με προσοχή και υλικά που
-							διαρκούν.
+							{$lng == 'gr'
+								? $secondaryHeader.column2.text.p1.gr
+								: $secondaryHeader.column2.text.p1.en}
 						</li>
 						<li>
-							Φαντασία και εμπειρία: Έχουμε χρόνια εμπειρίας και πολλές ιδέες για να κάνουμε το
-							σπίτι σας ή το γραφείο σας να ξεχωρίσει.
+							{$lng == 'gr'
+								? $secondaryHeader.column2.text.p2.gr
+								: $secondaryHeader.column2.text.p2.en}
 						</li>
 						<li>
-							Γρήγορα και άμεσα: Η δουλειά μας ολοκληρώνεται στην ώρα της, χωρίς να χάνουμε την
-							ποιότητα.
-						</li>
-						<li>
-							Ανοιχτοί σε ιδέες: Είμαστε πάντα ανοιχτοί να ακούσουμε τις ιδέες σας και να δουλέψουμε
-							μαζί για το καλύτερο αποτέλεσμα.
+							{$lng == 'gr'
+								? $secondaryHeader.column2.text.p3.gr
+								: $secondaryHeader.column2.text.p3.en}
 						</li>
 					</ul>
 				</div>
 				<div>
-					<h2>Δώστε ζωή στον χώρο σας</h2>
+					<h2>
+						{$lng == 'gr' ? $secondaryHeader.column3.title.gr : $secondaryHeader.column3.title.en}
+					</h2>
 					<p>
-						Αν ψάχνετε κάποιον να φτιάξει ή να ανακαινίσει τον χώρο σας με αγάπη και φροντίδα, μη
-						διστάσετε να επικοινωνήσετε μαζί μας. Είμαστε έτοιμοι να δώσουμε ζωή στα σχέδιά σας!
+						{$lng == 'gr'
+							? $secondaryHeader.column3.text.p1.gr
+							: $secondaryHeader.column3.text.p1.en}
 					</p>
 					<p>
-						Η κάθε λύση που προτείνουμε συνδυάζει λειτουργικότητα, εργονομία και αισθητική χωρίς να
-						της λείπει ταυτόχρονα και η ποιότητα.
+						{$lng == 'gr'
+							? $secondaryHeader.column3.text.p2.gr
+							: $secondaryHeader.column3.text.p2.en}
 					</p>
 				</div>
 			</div>
@@ -95,7 +105,9 @@
 		scroll-snap-type: y mandatory;
 		height: 100vh;
 		overflow-y: scroll;
-		word-spacing: -2px;
+		word-spacing: -0.5rem;
+		scrollbar-width: none;
+		-ms-overflow-style: none;
 	}
 	header {
 		display: grid;

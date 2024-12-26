@@ -3,8 +3,11 @@
 	import IoIosMenu from 'svelte-icons/io/IoIosMenu.svelte';
 	import Icon from '@iconify/svelte';
 	import IoIosCloseCircleOutline from 'svelte-icons/io/IoIosCloseCircleOutline.svelte';
+	import { lng, navText } from '$stores';
+
 	let hidden = true;
 	let innerWidth;
+
 	function toggleMenu() {
 		hidden = !hidden;
 	}
@@ -12,45 +15,53 @@
 
 <svelte:window bind:innerWidth />
 <nav>
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	{#if innerWidth < 1440}
 		{#if hidden}
-			<div class="menu-icon" on:click={toggleMenu} transition:fade={{ duration: 0 }}>
+			<button
+				type="button"
+				class="menu-icon icon-btn"
+				on:click={toggleMenu}
+				transition:fade={{ duration: 0 }}
+			>
 				<IoIosMenu></IoIosMenu>
-			</div>
+			</button>
 		{/if}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<!-- svelte-ignore a11y-no-static-element-interactions -->
 
 		{#if !hidden}
-			<div class="close-icon" on:click={toggleMenu} transition:fade={{ duration: 0 }}>
+			<button
+				type="button"
+				class="close-icon icon-btn"
+				on:click={toggleMenu}
+				transition:fade={{ duration: 0 }}
+			>
 				<IoIosCloseCircleOutline></IoIosCloseCircleOutline>
-			</div>
+			</button>
 			<ul>
 				<li in:fade={{ delay: 100, duration: 300 }} out:fade={{ delay: 300, duration: 300 }}>
 					<a href="/kouzines-ntoulapes"
 						><Icon icon="mdi:closet-outline" style="font-size: 30px" /><span>
-							Ντουλάπες-Κουζίνες</span
-						>
+							{$lng == 'gr' ? $navText.gr[0] : $navText.en[0]}
+						</span>
 					</a>
 				</li>
 				<li in:fade={{ delay: 200, duration: 300 }} out:fade={{ delay: 400, duration: 300 }}>
 					<a href="/koufomata"
-						><Icon icon="bi:door-open-fill" style="font-size: 30px" /><span> Κουφώματα</span></a
+						><Icon icon="bi:door-open-fill" style="font-size: 30px" /><span>
+							{$lng == 'gr' ? $navText.gr[1] : $navText.en[1]}</span
+						></a
 					>
 				</li>
 				<li in:fade={{ delay: 300, duration: 300 }} out:fade={{ delay: 300, duration: 300 }}>
 					<a href="/epipla-eidikes_kataskeues"
 						><Icon icon="hugeicons:cabinet-03" style="font-size: 30px" /><span>
-							Έπιπλα-Ειδικές κατασκευές</span
+							{$lng == 'gr' ? $navText.gr[2] : $navText.en[2]}</span
 						></a
 					>
 				</li>
 				<li in:fade={{ delay: 400, duration: 300 }} out:fade={{ delay: 200, duration: 300 }}>
 					<a href="/metallikes_kataskeues"
 						><Icon icon="mdi:eiffel-tower" style="font-size: 30px" /><span>
-							Μεταλλικές κατασκευές</span
+							{$lng == 'gr' ? $navText.gr[3] : $navText.en[3]}</span
 						></a
 					>
 				</li>
@@ -58,11 +69,15 @@
 				<li in:fade={{ delay: 600, duration: 300 }} out:fade={{ delay: 0, duration: 300 }}>
 					<a href="/epikoinonia">
 						<Icon icon="majesticons:phone-retro-line" style="font-size: 30px" /><span
-							>Επικοινωνία</span
+							>{$lng == 'gr' ? $navText.gr[4] : $navText.en[4]}</span
 						>
 					</a>
 				</li>
 			</ul>
+			<select name="lng" id="lng" bind:value={$lng}>
+				<option value="gr" selected>gr</option>
+				<option value="en">en</option>
+			</select>
 		{/if}
 	{:else}
 		<a href="/">
@@ -73,27 +88,42 @@
 		>
 
 		<a href="/kouzines-ntoulapes"
-			><Icon icon="mdi:closet-outline" style="font-size: 40px" /><span
-				>Κουζίνες-<br />Ντουλάπες</span
-			>
+			><Icon icon="mdi:closet-outline" style="font-size: 40px" />{#if $lng == 'gr'}
+				<span>Ντουλάπες-<br />Κουζίνες</span>
+			{:else}
+				<span>{$navText.en[0]}</span>
+			{/if}
 		</a>
 		<a href="/koufomata"
-			><Icon icon="bi:door-open-fill" style="font-size: 40px" /><span>Κουφώματα</span></a
+			><Icon icon="bi:door-open-fill" style="font-size: 40px" /><span
+				>{$lng == 'gr' ? $navText.gr[1] : $navText.en[1]}</span
+			></a
 		>
 		<a href="/epipla-eidikes_kataskeues"
-			><Icon icon="hugeicons:cabinet-03" style="font-size: 40px" /><span
-				>Έπιπλα-Ειδικές<br />κατασκευές</span
-			></a
+			><Icon icon="hugeicons:cabinet-03" style="font-size: 40px" />
+			{#if $lng == 'gr'}
+				<span>Έπιπλα-Ειδικές<br />κατασκευές</span>
+			{:else}
+				<span>{$navText.en[2]}</span>
+			{/if}</a
 		>
 		<a href="/metallikes_kataskeues"
-			><Icon icon="mdi:eiffel-tower" style="font-size: 40px" /><span
-				>Μεταλλικές<br />κατασκευές</span
-			></a
+			><Icon icon="mdi:eiffel-tower" style="font-size: 40px" />{#if $lng == 'gr'}
+				<span>Μεταλλικές<br />κατασκευές</span>
+			{:else}
+				<span>Metal<br />construction</span>
+			{/if}</a
 		>
 
 		<a href="/epikoinonia">
-			<Icon icon="majesticons:phone-retro-line" style="font-size: 40px" /><span>Επικοινωνία</span>
+			<Icon icon="majesticons:phone-retro-line" style="font-size: 40px" /><span
+				>{$lng == 'gr' ? $navText.gr[4] : $navText.en[4]}</span
+			>
 		</a>
+		<select name="lng" id="lng" bind:value={$lng}>
+			<option value="gr" selected>GR</option>
+			<option value="en">EN</option>
+		</select>
 	{/if}
 </nav>
 <slot></slot>
@@ -131,6 +161,10 @@
 	a span {
 		padding-left: 8px;
 		word-spacing: -3px;
+	}
+	.icon-btn {
+		border: none;
+		background: transparent;
 	}
 
 	.menu-icon {
@@ -172,9 +206,10 @@
 	@media (min-width: 1440px) {
 		nav {
 			display: grid;
-			grid-template-columns: 150px repeat(5, 1fr);
+			grid-template-columns: 12rem repeat(5, 1fr) 10rem;
 			justify-items: center;
 			align-items: center;
+			align-content: center;
 			height: 9rem;
 			padding: 0 10px;
 			background-color: rgba(5, 5, 5, 0.488);
@@ -200,9 +235,10 @@
 		}
 
 		img {
+			position: relative;
+			right: 2rem;
 			height: 75px;
 			width: 75px;
-
 			border: 1px solid #d4d2d2;
 			border-radius: 50%;
 			transition: all 0.4s;
@@ -210,5 +246,17 @@
 		img:hover {
 			filter: drop-shadow(0px 0px 10px rgba(249, 248, 248, 0.4));
 		}
+	}
+	select {
+		background: transparent;
+		padding: 1rem;
+		border: none;
+		outline: none;
+		color: #fefdfd;
+		font-size: 2.1rem;
+		opacity: 1;
+	}
+	select * {
+		background-color: black;
 	}
 </style>

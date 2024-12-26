@@ -21,6 +21,7 @@ export const POST = async ({ request }) => {
 			category: formData.get('category'),
 			subCategory: formData.get('subCategory'),
 			description: formData.get('description'),
+			descriptionEn: formData.get('descriptionEn'),
 			pictures: JSON.parse(formData.get('img')),
 			categoryIndex: count
 		});

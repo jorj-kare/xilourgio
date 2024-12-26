@@ -1,14 +1,12 @@
 <script>
 	import { PUBLIC_CLOUDINARY_URL } from '$env/static/public';
 	import { page } from '$app/stores';
-
+	import { lng } from '$stores';
 	export let data;
 	let productIndex;
-	let carousel = false;
 
 	function getIndex(e) {
 		productIndex = e.target.dataset.index;
-		// carousel = true;
 	}
 </script>
 
@@ -21,7 +19,7 @@
 			<a href="{$page.url.pathname}/{product._id}">
 				<img
 					src={PUBLIC_CLOUDINARY_URL + product.pictures[0]}
-					alt={product.description}
+					alt={$lng == 'gr' ? product.description : product.descriptionEn}
 					data-index={index}
 				/>
 			</a>
@@ -64,20 +62,13 @@
 	.grid-item {
 		width: 100%;
 		height: 100%;
-		/* border: 1px solid #e9e6e6;
-		border-radius: 5px; */
 	}
 	.grid-item img {
 		display: block;
 		width: 100%;
 		height: 100%;
-		/* padding: 2px; */
-		/* border: 4px solid rgb(5, 5, 5); */
-		/* border-radius: 5px; */
-		/* border-bottom: 2px solid #e9e6e6; */
 		color: #e9e6e6;
 		object-fit: cover;
-		/* filter: brightness(90%); */
 		transition: all 0.5s;
 	}
 	.grid-item img:hover {

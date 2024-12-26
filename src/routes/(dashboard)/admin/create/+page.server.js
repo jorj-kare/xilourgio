@@ -9,7 +9,6 @@ export const actions = {
 			let filenames = [];
 			let publicId = [];
 			const images = formData.getAll('img');
-
 			const cloudRes = await uploadToCloudinary(images);
 
 			if (cloudRes.error) {
