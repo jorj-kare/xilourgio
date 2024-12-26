@@ -93,8 +93,8 @@
 		<option value="">Ολες οι κατηγορίες</option>
 		<option value="ntoulapes,kouzines">Ντουλάπες-Κουζίνες</option>
 		<option value="koufomata">Κουφώματα</option>
-		<option value="metallikes_kataskeues,epipla">Επιπλα-Μεταλλικές κατασκευές</option>
-		<option value="eidikes_kataskeues">Ειδικές κατασκευές</option>
+		<option value="eidikes_kataskeues,epipla">Επιπλα-Ειδικές κατασκευές</option>
+		<option value="metallikes_kataskeues">Μεταλλικές κατασκευές</option>
 	</select>
 </nav>
 <div class="container">
