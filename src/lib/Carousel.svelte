@@ -23,9 +23,9 @@
 <div class="box">
 	<figure transition:fade={{ duration: 150 }}>
 		{#each [images.pictures[currentSlideItem]] as item (currentSlideItem)}
-			<div class="close-icon" on:click>
+			<button class="close-icon" on:click>
 				<IoIosClose></IoIosClose>
-			</div>
+			</button>
 			<img
 				in:fade={{ duration: 1000 }}
 				src={PUBLIC_CLOUDINARY_URL + item}
@@ -114,7 +114,11 @@
 		align-self: flex-start;
 		justify-self: end;
 		width: 5.5rem;
+		height: auto;
 		margin: 5px;
+		background-color: transparent;
+		border: none;
+		outline: none;
 		color: #fafafa;
 		transition: all 0.5s;
 	}

@@ -1,5 +1,32 @@
 import { readable, writable } from 'svelte/store';
 
+function notifier() {
+	const { subscribe, set, update } = writable([]);
+	function success(msg) {
+		update((items) => {
+			const newArr = [{ success: msg }, ...items];
+			return newArr;
+		});
+	}
+	function error(msg) {
+		update((items) => {
+			const newArr = [{ error: msg }, ...items];
+			return newArr;
+		});
+	}
+	function remove() {
+		update((items) => {
+			const newArr = [...items];
+			newArr.pop();
+			return newArr;
+		});
+	}
+	function reset() {
+		set([]);
+	}
+	return { subscribe, error, success, remove, reset };
+}
+export const notify = notifier();
 export const lng = writable('gr');
 
 export const navText = readable({

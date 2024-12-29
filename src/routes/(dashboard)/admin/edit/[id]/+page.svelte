@@ -3,11 +3,12 @@
 	import PreviewImgInput from '$lib/PreviewImgInput.svelte';
 	import MdDelete from 'svelte-icons/md/MdDelete.svelte';
 	import FaArrowAltCircleRight from 'svelte-icons/fa/FaArrowAltCircleRight.svelte';
-	import { NotificationDisplay, notifier } from '@beyonk/svelte-notifications';
 	import { Pulse } from 'svelte-loading-spinners';
 	import { page } from '$app/stores';
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
+	import { notify } from '$stores';
+	import Notifications from '$lib/Notifications.svelte';
 
 	export let data;
 	let submitting = false;
@@ -21,21 +22,21 @@
 	let descriptionEn = data.products.descriptionEn;
 
 	$: if ($page.form?.success && submitting) {
-		notifier.success('Η καταχώρηση ενημερώθηκε επιτυχώς.');
+		notify.success('Η καταχώρηση ενημερώθηκε επιτυχώς.');
 		submitting = false;
 	} else if ($page.form?.error && submitting) {
-		notifier.danger($page.form.error);
+		notify.error($page.form.error);
 		submitting = false;
 	}
 
 	async function addImg() {
 		submitting = true;
 		const formData = new FormData();
-
-		for (let i = 0; i < files.length; i++) {
-			formData.append('newImg', files[i]);
+		if (files?.length > 0) {
+			for (let i = 0; i < files.length; i++) {
+				formData.append('newImg', files[i]);
+			}
 		}
-
 		const res = await fetch(`/api/product/${$page.params.id}`, {
 			method: 'PATCH',
 			body: formData
@@ -44,13 +45,13 @@
 		if (!res.ok) {
 			const resJson = await res.json();
 			console.log(resJson);
-			notifier.danger(resJson.message);
+			notify.error(resJson.message);
 			submitting = false;
 		}
 		submitting = false;
 		files = '';
 		goto($page.url.pathname, { invalidateAll: true });
-		notifier.success('Οι φωτογραφίες αποθηκεύτηκαν επιτυχώς');
+		notify.success('Οι φωτογραφίες αποθηκεύτηκαν επιτυχώς');
 	}
 
 	async function deleteImg(imgName) {
@@ -65,13 +66,12 @@
 		if (!res.ok) {
 			const resJson = await res.json();
 			console.log(resJson);
-
-			notifier.danger(resJson.message);
+			notifier.error(resJson.message);
 			submitting = false;
 		}
 		submitting = false;
 		goto($page.url.pathname, { invalidateAll: true });
-		notifier.success('Η φωτογραφία διαγράφηκε επιτυχώς');
+		notify.success('Η φωτογραφία διαγράφηκε επιτυχώς');
 	}
 
 	async function orderImages() {
@@ -86,13 +86,12 @@
 		});
 		if (!res.ok) {
 			const resJson = await res.json();
-			notifier.danger(resJson.message);
+			notify.error(resJson.message);
 			submitting = false;
 		}
 		submitting = false;
 		goto($page.url.pathname, { invalidateAll: true });
-
-		notifier.success('Οι φωτογραφίες άλλαξαν σειρά επιτυχώς');
+		notify.success('Οι φωτογραφίες άλλαξαν σειρά επιτυχώς');
 	}
 	$: {
 		if (data.products.pictures.length != orderedImgs.length) {
@@ -110,7 +109,7 @@
 	}
 </script>
 
-<NotificationDisplay {timeout} />
+<Notifications {timeout} />
 {#if submitting}
 	<div class="spinn"><Pulse color="blue"></Pulse></div>
 {/if}
@@ -147,7 +146,7 @@
 				</select>
 				<label for="description">Περιγραφή</label>
 				<textarea bind:value={description} name="description" id="description" rows="3"></textarea>
-				<label for="description">Περιγραφή(Αγγλικά)</label>
+				<label for="descriptionEn">Περιγραφή(Αγγλικά)</label>
 				<textarea bind:value={descriptionEn} name="descriptionEn" id="descriptionEn" rows="3"
 				></textarea>
 				<button type="submit">Καταχώρηση</button>
@@ -179,13 +178,15 @@
 								title={data.products.description}
 							/>
 
-							<select id="selectOrder" bind:value={selectEl[index]}>
+							<select class="selectOrder" bind:value={selectEl[index]}>
 								{#each orderedImgs as path, i (i)}
 									<option value={i} selected={i == index ? true : false}>{i + 1}</option>
 								{/each}
 							</select>
 
-							<button type="button" id="deleteImg" on:click={deleteImg(path)}><MdDelete /></button>
+							<button type="button" class="deleteImg" on:click={deleteImg(path)}
+								><MdDelete /></button
+							>
 						</div>
 					{/each}
 				{/key}
@@ -277,7 +278,7 @@
 		transition: filter 0.2s ease-in-out;
 	}
 
-	#deleteImg {
+	.deleteImg {
 		position: absolute;
 		top: 0.5rem;
 		right: 0;
@@ -289,10 +290,10 @@
 		color: #fefdfd;
 		opacity: 1;
 	}
-	#deleteImg:hover {
+	.deleteImg:hover {
 		color: #d33340;
 	}
-	#selectOrder {
+	.selectOrder {
 		position: absolute;
 		top: 1rem;
 		left: 0.5rem;

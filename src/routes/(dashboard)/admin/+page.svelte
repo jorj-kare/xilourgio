@@ -1,6 +1,6 @@
 <script>
-	import { NotificationDisplay, notifier } from '@beyonk/svelte-notifications';
-
+	import Notifications from '$lib/Notifications.svelte';
+	import { notify } from '$stores';
 	import { PUBLIC_CLOUDINARY_URL } from '$env/static/public';
 	import { page } from '$app/stores';
 	import IoIosAdd from 'svelte-icons/io/IoIosAdd.svelte';
@@ -21,10 +21,10 @@
 			method: 'DELETE'
 		});
 		if (!res.ok) {
-			notifier.warning('Κάτι πήγε στραβά, προσπάθησε ξανά αργότερα.');
+			notify.error('Κάτι πήγε στραβά, προσπάθησε ξανά αργότερα.');
 		}
 
-		notifier.success('Η καταχώριση διαγράφηκε επιτυχώς');
+		notify.success('Η καταχώριση διαγράφηκε επιτυχώς');
 	}
 
 	function filterByCategory() {
@@ -47,8 +47,6 @@
 
 	async function sortProducts() {
 		for (let i = 0; i < products.length; i++) {
-			console.log(products[i].categoryIndex, i + 1);
-
 			if (products[i].categoryIndex != i + 1) {
 				const formData = new FormData();
 				formData.append('categoryIndex', i + 1);
@@ -58,12 +56,12 @@
 				});
 				if (!res.ok) {
 					const resJson = await res.json();
-					notifier.danger(resJson.message);
+					notify.error(resJson.message);
 				}
 			}
 		}
 
-		notifier.success('Η σειρά άλλαξε επιτυχώς');
+		notify.success('Η σειρά άλλαξε επιτυχώς');
 		setTimeout(() => {
 			goto(`${$page.url.pathname}/create`, { invalidateAll: true }).then(() => goto('/admin'));
 		}, 3000);
@@ -86,7 +84,7 @@
 	});
 </script>
 
-<NotificationDisplay {timeout} />
+<Notifications />
 <nav>
 	<button type="button" id="create">new<a href="/admin/create"><IoIosAdd /></a></button>
 	<select id="category" bind:value={category} on:change={filterByCategory}>
@@ -98,7 +96,7 @@
 	</select>
 </nav>
 <div class="container">
-	<NotificationDisplay {timeout} />
+	<Notifications {timeout} />
 	{#key products}
 		{#each products as product, index}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->

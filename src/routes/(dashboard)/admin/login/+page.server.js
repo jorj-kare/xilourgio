@@ -1,4 +1,4 @@
-import { error, redirect } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 export const actions = {
 	default: async ({ request, fetch }) => {
 		const formData = await request.formData();
@@ -9,11 +9,12 @@ export const actions = {
 		});
 		const resJson = await res.json();
 
-		if (!res.ok)
-			throw error(res.status, {
+		if (!res.ok) {
+			return fail(res.status, {
+				error: true,
 				message: resJson.message
 			});
-
+		}
 		throw redirect(302, '/admin');
 	}
 };

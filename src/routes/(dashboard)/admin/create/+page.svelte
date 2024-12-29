@@ -2,7 +2,8 @@
 	import PreviewImgInput from '$lib/PreviewImgInput.svelte';
 	import GoArrowSmallUp from 'svelte-icons/go/GoArrowSmallUp.svelte';
 	import GoArrowSmallDown from 'svelte-icons/go/GoArrowSmallDown.svelte';
-	import { NotificationDisplay, notifier } from '@beyonk/svelte-notifications';
+	import Notifications from '$lib/Notifications.svelte';
+	import { notify } from '$stores';
 	import { Pulse } from 'svelte-loading-spinners';
 	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
@@ -25,26 +26,22 @@
 				}
 			}
 		}
-		console.log(files);
-
 		files = dt.files;
-
-		console.log(files);
 	}
 
 	$: {
 		if ($page.form?.success && submitting) {
-			notifier.success('Η καταχώρηση δημιουργήθηκε επιτυχώς.');
+			notify.success('Η καταχώρηση δημιουργήθηκε επιτυχώς.');
 			submitting = false;
 			files = '';
 		} else if ($page.form?.error && submitting) {
-			notifier.danger($page.form.error);
+			notify.error($page.form.error);
 			submitting = false;
 		}
 	}
 </script>
 
-<NotificationDisplay {timeout} />
+<Notifications {timeout} />
 
 {#if submitting}
 	<div class="spinn"><Pulse color="blue"></Pulse></div>
