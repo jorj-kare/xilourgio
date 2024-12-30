@@ -1,7 +1,7 @@
 <script>
 	import video from '$lib/media/166808-835670743.mp4';
 	import { onMount } from 'svelte';
-	import AnimateHeader from '$lib/AnimateHeader.svelte';
+	import AnimateHeader from '$lib/components/AnimateHeader.svelte';
 	import { lng, mainHeader, secondaryHeader } from '$stores';
 
 	const imgArr = [

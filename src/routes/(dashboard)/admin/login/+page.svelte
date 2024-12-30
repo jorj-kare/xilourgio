@@ -1,5 +1,5 @@
 <script>
-	import Notifications from '$lib/Notifications.svelte';
+	import Notifications from '$lib/components/Notifications.svelte';
 	import { notify } from '$stores';
 	import { page } from '$app/stores';
 

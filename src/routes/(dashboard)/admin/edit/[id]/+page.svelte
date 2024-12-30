@@ -1,6 +1,7 @@
 <script>
 	import { PUBLIC_CLOUDINARY_URL } from '$env/static/public';
-	import PreviewImgInput from '$lib/PreviewImgInput.svelte';
+	import PreviewImgInput from '$lib/components/PreviewImgInput.svelte';
+	import Notifications from '$lib/components/Notifications.svelte';
 	import MdDelete from 'svelte-icons/md/MdDelete.svelte';
 	import FaArrowAltCircleRight from 'svelte-icons/fa/FaArrowAltCircleRight.svelte';
 	import { Pulse } from 'svelte-loading-spinners';
@@ -8,7 +9,6 @@
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import { notify } from '$stores';
-	import Notifications from '$lib/Notifications.svelte';
 
 	export let data;
 	let submitting = false;

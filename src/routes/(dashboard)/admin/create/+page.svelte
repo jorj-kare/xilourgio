@@ -1,8 +1,8 @@
 <script>
-	import PreviewImgInput from '$lib/PreviewImgInput.svelte';
+	import PreviewImgInput from '$lib/components/PreviewImgInput.svelte';
+	import Notifications from '$lib/components/Notifications.svelte';
 	import GoArrowSmallUp from 'svelte-icons/go/GoArrowSmallUp.svelte';
 	import GoArrowSmallDown from 'svelte-icons/go/GoArrowSmallDown.svelte';
-	import Notifications from '$lib/Notifications.svelte';
 	import { notify } from '$stores';
 	import { Pulse } from 'svelte-loading-spinners';
 	import { enhance } from '$app/forms';

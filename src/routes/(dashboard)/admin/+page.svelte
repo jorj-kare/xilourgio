@@ -1,7 +1,7 @@
 <script>
-	import Notifications from '$lib/Notifications.svelte';
-	import { notify } from '$stores';
 	import { PUBLIC_CLOUDINARY_URL } from '$env/static/public';
+	import Notifications from '$lib/components/Notifications.svelte';
+	import { notify } from '$stores';
 	import { page } from '$app/stores';
 	import IoIosAdd from 'svelte-icons/io/IoIosAdd.svelte';
 	import MdModeEdit from 'svelte-icons/md/MdModeEdit.svelte';
