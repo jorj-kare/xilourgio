@@ -2,6 +2,7 @@
 	import { PUBLIC_CLOUDINARY_URL } from '$env/static/public';
 	import PreviewImgInput from '$lib/components/PreviewImgInput.svelte';
 	import Notifications from '$lib/components/Notifications.svelte';
+	import GoBackButton from '$lib/components/GoBackButton.svelte';
 	import MdDelete from 'svelte-icons/md/MdDelete.svelte';
 	import FaArrowAltCircleRight from 'svelte-icons/fa/FaArrowAltCircleRight.svelte';
 	import { Pulse } from 'svelte-loading-spinners';
@@ -110,6 +111,7 @@
 </script>
 
 <Notifications {timeout} />
+<GoBackButton path="/admin"></GoBackButton>
 {#if submitting}
 	<div class="spinn"><Pulse color="blue"></Pulse></div>
 {/if}

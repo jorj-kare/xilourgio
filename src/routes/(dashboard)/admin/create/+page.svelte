@@ -1,6 +1,7 @@
 <script>
 	import PreviewImgInput from '$lib/components/PreviewImgInput.svelte';
 	import Notifications from '$lib/components/Notifications.svelte';
+	import GoBackButton from '$lib/components/GoBackButton.svelte';
 	import GoArrowSmallUp from 'svelte-icons/go/GoArrowSmallUp.svelte';
 	import GoArrowSmallDown from 'svelte-icons/go/GoArrowSmallDown.svelte';
 	import { notify } from '$stores';
@@ -42,7 +43,7 @@
 </script>
 
 <Notifications {timeout} />
-
+<GoBackButton path="/admin" />
 {#if submitting}
 	<div class="spinn"><Pulse color="blue"></Pulse></div>
 {/if}
