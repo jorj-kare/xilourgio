@@ -13,8 +13,8 @@
 		justify-content: center;
 		width: 100vw;
 		min-height: 100vh;
-		background-color: black;
-		color: aliceblue;
+		background-color: var(--color-primary);
+		color: var(--color-secondary);
 		font-size: 2rem;
 	}
 </style>

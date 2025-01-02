@@ -50,7 +50,7 @@
 		align-items: center;
 		width: 100vw;
 		min-height: 100vh;
-		background-color: rgb(5, 5, 5);
+		background-color: var(--color-primary);
 	}
 	figure {
 		position: relative;
@@ -61,17 +61,9 @@
 		justify-content: center;
 		height: 85vh;
 		width: 65vw;
-		margin-top: 15px;
-		border-radius: 15px;
-		color: #e9e6e6;
-		border: 3px solid #e9e6e6;
-	}
-	p {
-		padding: 10px 20px;
-		max-width: 120ch;
-		margin-top: 5px;
-
-		color: #e9e6e6;
+		margin-top: 1.5rem;
+		border-radius: 1.5rem;
+		border: 3px solid var(color-secondary);
 	}
 
 	img {
@@ -79,10 +71,16 @@
 		grid-row: 1/2;
 		width: 100%;
 		height: 100%;
-		padding-top: 50px;
-		padding-left: 15px;
+		padding-top: 5rem;
+		padding-left: 1.5rem;
 		object-fit: contain;
 		overflow: hidden;
+	}
+
+	p {
+		padding: 1rem 2rem;
+		max-width: 120ch;
+		margin-top: 0.5rem;
 	}
 	.carousel-buttons {
 		grid-row: 2/3;
@@ -91,10 +89,10 @@
 		align-self: center;
 	}
 	button {
-		width: 50px;
-		height: 25px;
-		margin: 25px 0px;
-		color: aliceblue;
+		width: 5rem;
+		height: 2.5rem;
+		margin: 2.5rem 0px;
+		color: var(--color-secondary);
 		background-color: transparent;
 		border: none;
 		border-radius: 50%;
@@ -102,11 +100,11 @@
 	}
 	.btn-right:hover {
 		transform: translateX(3px);
-		color: #1c8437;
+		color: var(--color-success);
 	}
 	.btn-left:hover {
 		transform: translateX(-3px);
-		color: #1c8437;
+		color: var(--color-success);
 	}
 	.close-icon {
 		grid-column: 2/3;
@@ -115,15 +113,15 @@
 		justify-self: end;
 		width: 5.5rem;
 		height: auto;
-		margin: 5px;
+		margin: 0.5rem;
 		background-color: transparent;
 		border: none;
 		outline: none;
-		color: #fafafa;
+		color: var(--color-secondary);
 		transition: all 0.5s;
-	}
-	.close-icon:hover {
-		transform: rotate(180deg);
-		color: #660b0b;
+		&:hover {
+			transform: rotate(180deg);
+			color: var(--color-error);
+		}
 	}
 </style>

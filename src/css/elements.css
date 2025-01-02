@@ -1,0 +1,37 @@
+.btn-submit {
+	border-radius: 1.5rem;
+	padding: 1rem;
+	border: 1px solid var(--color-secondary);
+	color: var(--color-secondary);
+	background-color: transparent;
+	outline: transparent;
+	transition: all 0.7s;
+
+	&:hover {
+		background-color: var(--color-success);
+		color: var(--color-primary);
+		border-color: var(--color-success);
+	}
+}
+
+.select {
+	background: var(--color-primary);
+	padding: 1rem;
+	border: 1px solid var(--color-secondary);
+	border-radius: 0.5rem;
+	outline: transparent;
+	color: var(--color-secondary);
+	opacity: 1;
+}
+.select * {
+	background-color: var(--color-primary);
+}
+
+.input {
+	padding: 0.7rem;
+	border: 1px solid var(--color-secondary);
+	border-radius: 0.5rem;
+	background-color: var(--color-primary);
+	color: var(--color-secondary);
+	outline: transparent;
+}

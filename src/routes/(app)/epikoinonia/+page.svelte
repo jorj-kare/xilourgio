@@ -45,7 +45,6 @@
 		justify-content: start;
 		width: 100%;
 		min-height: 100vh;
-		color: #e9e6e6;
 		background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
 			url(../../../lib/media/hero_img.jpg);
 		background-size: cover;
@@ -59,8 +58,7 @@
 		align-items: start;
 		width: 55%;
 		padding: 5rem;
-		border-radius: 5px;
-		/* background-color: rgba(35, 35, 35, 0.764); */
+		border-radius: 0.5rem;
 	}
 	.contact {
 		align-self: flex-start;
@@ -76,16 +74,14 @@
 	}
 	.contact a {
 		text-decoration: none;
-		color: #e9e6e6;
 	}
 
 	h1 {
 		width: 90%;
 		margin-bottom: 1rem;
-		color: #e9e6e6;
 		font-weight: 700;
 		word-spacing: -5px;
-		border-bottom: 1px solid #e9e6e6;
+		border-bottom: 1px solid var(--color-secondary);
 	}
 	h2 {
 		font-weight: 300;
@@ -93,7 +89,7 @@
 		word-spacing: -3px;
 	}
 	.icon {
-		width: 50px;
+		width: 5rem;
 		padding-right: 1rem;
 		color: rgb(209, 99, 65);
 		transition: all 0.2s;
@@ -105,6 +101,6 @@
 		transform: scale(1.05);
 	}
 	.link-box:hover a {
-		text-shadow: 5px 5px 15px #fafafa;
+		text-shadow: 5px 5px 15px var(--color-secondary);
 	}
 </style>

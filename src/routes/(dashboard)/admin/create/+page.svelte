@@ -44,8 +44,9 @@
 
 <Notifications {timeout} />
 <GoBackButton path="/admin" />
+
 {#if submitting}
-	<div class="spinn"><Pulse color="blue"></Pulse></div>
+	<div class="spin"><Pulse color="blue"></Pulse></div>
 {/if}
 <div class="container">
 	<form
@@ -62,7 +63,7 @@
 		}}
 	>
 		<label for="category">Κατηγορία</label>
-		<select id="category" name="category">
+		<select class="select" id="category" name="category">
 			<option value="ntoulapes">Ντουλάπα</option>
 			<option value="kouzines">Κουζίνα</option>
 			<option value="koufomata">Κουφώματα</option>
@@ -71,7 +72,7 @@
 			<option value="eidikes_kataskeues">Ειδικές κατασκευές</option>
 		</select>
 		<label for="subCategory">Υποκατηγορία</label>
-		<select id="subCategory" name="subCategory">
+		<select class="select" id="subCategory" name="subCategory">
 			<option value="">Καμία</option>
 			<option value="ntoulapa">Ντουλάπα</option>
 			<option value="trapezi">Τραπέζι</option>
@@ -80,11 +81,11 @@
 			<option value="krebati">Κρεβάτι</option>
 		</select>
 		<label for="description">Περιγραφή</label>
-		<textarea name="description" id="description" rows="3"></textarea>
+		<textarea class="input" name="description" id="description" rows="3"></textarea>
 		<label for="description">Περιγραφή(Αγγλικά)</label>
-		<textarea name="descriptionEn" id="descriptionEn" rows="3"></textarea>
+		<textarea class="input" name="descriptionEn" id="descriptionEn" rows="3"></textarea>
 		<label for="imgUploader">Φωτογραφίες</label>
-		<input id="imgUploader" name="img" type="file" multiple required bind:files />
+		<input class="input" id="imgUploader" name="img" type="file" multiple required bind:files />
 		{#if files}
 			{#key files}
 				<PreviewImgInput {files} />
@@ -109,7 +110,7 @@
 			{/key}
 		{/if}
 
-		<button type="submit" disabled={submitting}>Καταχώρηση</button>
+		<button class="btn-submit" type="submit" disabled={submitting}>Καταχώρηση</button>
 	</form>
 </div>
 
@@ -125,44 +126,23 @@
 		flex-direction: column;
 		gap: 1px;
 		padding: 5rem;
-		border: 1px solid #eee;
+		border: 1px solid var(--color-secondary);
 	}
 	label {
 		margin-top: 1.5rem;
 	}
 	button[type='submit'] {
+		width: 50%;
 		margin-top: 2.5rem;
-		width: 30rem;
-		align-self: center;
-		padding: 1rem 0;
-		border: none;
-		border-radius: 5px;
-		transition:
-			background-color 0.5s,
-			color 0.7s;
-	}
-	button[type='submit']:hover {
-		color: #eee;
-		background-color: rgba(14, 152, 14, 0.933);
+		padding: 1.5rem;
 	}
 	input,
 	textarea,
 	select {
 		width: 50%;
 	}
-	select {
-		background: #12121262;
-		padding: 1rem;
-		border: 1px solid #fefdfd;
-		border-radius: 5px;
-		color: #fefdfd;
-		opacity: 1;
-	}
-	select * {
-		background-color: black;
-	}
 
-	.spinn {
+	.spin {
 		position: absolute;
 		left: 0;
 		right: 0;
@@ -177,22 +157,22 @@
 	#sortImgs {
 		display: flex;
 		align-items: center;
-	}
-	#sortImgs button {
-		width: 3rem;
-		margin: 0 0.2rem;
-		display: inline-block;
-		background-color: transparent;
-		color: #eee;
-		border: none;
-		transition: all 0.5s;
-	}
-	#sortImgs button:hover {
-		color: aquamarine;
-	}
-	.disabled {
-		opacity: 0.5 !important;
-		pointer-events: none;
+		& button {
+			width: 3rem;
+			margin: 0 0.2rem;
+			display: inline-block;
+			background-color: transparent;
+			color: var(--color-secondary);
+			border: none;
+			transition: all 0.5s;
+			&:hover {
+				color: aquamarine;
+			}
+		}
+		& span {
+			display: inline-block;
+			margin: 1rem;
+		}
 	}
 
 	#btnUp:hover {
@@ -201,8 +181,8 @@
 	#btnDown:hover {
 		transform: translateY(0.8rem);
 	}
-	#sortImgs span {
-		display: inline-block;
-		margin: 1rem;
+	.disabled {
+		opacity: 0.5 !important;
+		pointer-events: none;
 	}
 </style>

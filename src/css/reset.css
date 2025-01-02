@@ -1,5 +1,6 @@
 /* -------RESET STYLES-----------*/
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import '../css/variables.css';
 
 *,
 *::before,
@@ -20,10 +21,11 @@ body {
 }
 
 body {
-	line-height: 1.5;
-	font-size: 1.6rem;
-	-webkit-font-smoothing: antialiased;
 	margin: 0;
+	-webkit-font-smoothing: antialiased;
+	color: var(--color-secondary);
+	font-size: 1.6rem;
+	line-height: 1.5;
 }
 
 img,
@@ -40,6 +42,9 @@ button,
 textarea,
 select {
 	font: inherit;
+}
+a {
+	color: var(--color-secondary);
 }
 
 p,

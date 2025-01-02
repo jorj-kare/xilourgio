@@ -34,15 +34,14 @@
 		margin-bottom: 0.5rem;
 		padding: 1.5rem 3rem;
 		min-width: 50rem;
-		border-radius: 25px;
-		color: #eee;
-		border: 1px solid #eee;
+		border-radius: 2.5rem;
+		border: 1px solid var(--color-secondary);
 		font-size: 2.1rem;
 	}
 	.success {
-		background-color: #2dab74f0;
+		background-color: var(--color-success);
 	}
 	.error {
-		background-color: #dc2b2b;
+		background-color: var(--color-error);
 	}
 </style>

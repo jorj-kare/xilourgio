@@ -87,7 +87,7 @@
 <Notifications />
 <nav>
 	<button type="button" id="create">new<a href="/admin/create"><IoIosAdd /></a></button>
-	<select id="category" bind:value={category} on:change={filterByCategory}>
+	<select class="select" id="category" bind:value={category} on:change={filterByCategory}>
 		<option value="">Ολες οι κατηγορίες</option>
 		<option value="ntoulapes,kouzines">Ντουλάπες-Κουζίνες</option>
 		<option value="koufomata">Κουφώματα</option>
@@ -114,7 +114,7 @@
 					>
 					{#if showSelect}
 						<form>
-							<select bind:value={selectElement[index]}>
+							<select class="select-order" bind:value={selectElement[index]}>
 								{#each products as p, i (i)}
 									<option value={i} selected={index == i ? true : false}>{i + 1}</option>
 								{/each}
@@ -148,30 +148,30 @@
 		height: 7rem;
 		margin: 4rem;
 		padding: 3rem;
-		border: 2px solid #e9e6e6;
-		background-color: rgb(5, 5, 5);
+		border: 2px solid var(--color-secondary);
+		background-color: var(--color-primary);
 		border-radius: 50%;
-		color: #e9e6e6;
+		color: var(--color-secondary);
 		font-weight: 700;
 		transition: all 1s;
+		&:hover {
+			background-color: var(--color-success);
+			color: var(--color-secondary);
+		}
+		& a {
+			position: absolute;
+			bottom: -0.8rem;
+			right: -3rem;
+			display: inline-block;
+			width: 6rem;
+			transition: all 1s;
+			&:hover {
+				transform: scale(1.3);
+				color: var(--color-secondary);
+			}
+		}
 	}
-	#create a {
-		position: absolute;
-		bottom: -0.8rem;
-		right: -3rem;
-		display: inline-block;
-		width: 6rem;
-		color: #e9e6e6;
-		transition: all 1s;
-	}
-	#create:hover {
-		background-color: rgb(34, 132, 93);
-		color: #e9e6e6;
-	}
-	#create a:hover {
-		transform: scale(1.3);
-		color: #e9e6e6;
-	}
+
 	#category {
 		padding: 1rem;
 		border-width: 2px;
@@ -187,66 +187,55 @@
 		width: 100vw;
 		min-height: 100vh;
 		padding: 15rem 4rem;
-		background-color: rgb(5, 5, 5);
+		background-color: var(--color-primary);
 	}
 	.grid-item {
 		display: flex;
 		flex-direction: column;
 		width: 100%;
 		height: 100%;
-		border: 1px solid #e9e6e6;
-		border-radius: 5px;
+		border: 1px solid var(--color-secondary);
+		border-radius: 0.5rem;
+		& img {
+			display: block;
+			width: 100%;
+			height: 80%;
+			padding: 0.2rem;
+			border: 0.4rem solid var(--color-primary);
+			border-radius: 0.5rem;
+			object-fit: cover;
+		}
 	}
 
-	.grid-item img {
-		display: block;
-		width: 100%;
-		height: 80%;
-		padding: 2px;
-		border: 4px solid rgb(5, 5, 5);
-		border-radius: 5px;
-		color: #e9e6e6;
-		object-fit: cover;
-	}
 	.anchor-box {
 		display: flex;
 		align-content: center;
 		align-items: center;
 		justify-content: center;
 		gap: 3rem;
+		height: 20%;
 		padding: 1rem 2rem;
-		border-top: 1px solid #e9e6e6;
-	}
-	.anchor-box button {
-		border: none;
-		background: transparent;
-		padding: 0;
-		color: inherit;
+		border-top: 1px solid var(--color-secondary);
+		& button {
+			border: none;
+			background: transparent;
+			padding: 0;
+			color: inherit;
+		}
 	}
 	.anchor {
 		display: block;
 		width: 25px;
-		color: #e9e6e6;
 		transition: all 0.5s;
-	}
-	.anchor:hover {
-		color: rgb(22, 173, 22);
-		cursor: pointer;
+		&:hover {
+			color: var(--color-success);
+			cursor: pointer;
+		}
 	}
 	#delete:hover {
-		color: rgb(173, 22, 52);
+		color: var(--color-error);
 	}
-	select {
-		background: #12121262;
-		padding: 0.5rem 1rem;
-		border: 1px solid #fefdfd;
-		border-radius: 5px;
-		color: #fefdfd;
-		opacity: 1;
-	}
-	select * {
-		background-color: black;
-	}
+
 	#orderBtn {
 		position: relative;
 		display: flex;
@@ -256,29 +245,37 @@
 		padding: 0;
 		width: 18rem;
 		height: 15rem;
-		color: #0f0e0e;
 		font-weight: 700;
 		transition: all 1.3s;
 		clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 		cursor: pointer;
+		&:hover {
+			transform: rotate(-180deg);
+		}
+		&:hover span {
+			transform: translateY(-6rem);
+			background-color: var(--color-error);
+		}
+		& span {
+			position: absolute;
+			bottom: -0.5rem;
+			background-color: var(--color-primary);
+			color: var(--color-secondary);
+			padding: 3rem 2.5rem;
+			border-radius: 50%;
+			transition: all 1s 1s;
+		}
 	}
-
-	#orderBtn:hover {
-		transform: rotate(-180deg);
+	.select-order {
+		color: var(--color-secondary);
+		background: transparent;
+		padding: 1rem;
+		border: none;
+		outline: none;
+		font-size: 2.1rem;
+		opacity: 1;
 	}
-
-	#orderBtn:hover span {
-		transform: translateY(-6rem);
-		background-color: #ae1212;
-	}
-
-	#orderBtn span {
-		position: absolute;
-		bottom: -0.5rem;
-		background-color: #0f0e0e;
-		color: #e9e6e6;
-		padding: 3rem 2rem;
-		border-radius: 50%;
-		transition: all 1s 1s;
+	.select-order * {
+		background-color: var(--color-primary);
 	}
 </style>

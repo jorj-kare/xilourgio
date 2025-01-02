@@ -1,5 +1,7 @@
 <script>
 	import '../css/reset.css';
+	import '../css/variables.css';
+	import '../css/elements.css';
 </script>
 
 <slot></slot>

@@ -134,17 +134,17 @@
 		padding: 2rem;
 		margin-left: 3rem;
 		margin-bottom: 50px;
-		border-radius: 5px;
-		color: #ffffff;
+		border-radius: 0.5rem;
 		font-weight: 300;
 		font-size: 2rem;
 		z-index: 10;
+		& h1 {
+			font-weight: 300;
+			font-size: 4rem;
+			border-bottom: 2px solid var(--color-secondary);
+		}
 	}
-	.title-box h1 {
-		font-weight: 300;
-		font-size: 4rem;
-		border-bottom: 2px solid #f3f2f2;
-	}
+
 	section {
 		position: relative;
 		z-index: 11;
@@ -155,31 +155,31 @@
 		align-items: flex-end;
 		align-content: end;
 		gap: 4rem;
-		padding: 30px;
+		padding: 3rem;
 		height: 100vh;
-		border-top: 2px solid #f3f2f2;
+		border-top: 2px solid var(--color-secondary);
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: center;
 		scroll-snap-align: start;
 		z-index: 11;
-	}
-	.info div {
-		color: #f3f2f2;
-		font-size: 2rem;
-		padding: 15px;
-	}
-	.info h2 {
-		font-size: 3rem;
-		font-weight: 700;
-		word-spacing: -6px;
-		border-bottom: 1px solid #f3f2f2;
+
+		& div {
+			font-size: 2rem;
+			padding: 1.5rem;
+		}
+		& h2 {
+			font-size: 3rem;
+			font-weight: 700;
+			word-spacing: -6px;
+			border-bottom: 1px solid var(--color-secondary);
+		}
+		& p {
+			padding-top: 0.5rem;
+		}
 	}
 
 	ul {
 		padding: 1rem;
-	}
-	.info p {
-		padding-top: 5px;
 	}
 </style>

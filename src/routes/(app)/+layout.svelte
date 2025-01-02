@@ -151,15 +151,13 @@
 		display: inline-flex;
 		align-items: flex-end;
 		padding-bottom: 1px;
-		color: #fafafa;
 		font-size: clamp(18px, 2vw, 28px);
 		line-height: 1.2;
 		text-decoration: none;
-		border-bottom: 2px solid #fafafa;
+		border-bottom: 2px solid var(--color-secondary);
 	}
-
 	a span {
-		padding-left: 8px;
+		padding-left: 0.8rem;
 		word-spacing: -3px;
 	}
 	.icon-btn {
@@ -168,39 +166,50 @@
 	}
 
 	.menu-icon {
-		color: #fafafa;
 		transition: all 0.4s;
 		width: 4.5rem;
-		margin: 15px;
-		margin-left: 5px;
+		margin: 1.5rem;
+		margin-left: 0.5rem;
 	}
 	.menu-icon:hover {
 		filter: drop-shadow(0px 5px 5px rgba(249, 248, 248, 0.4));
 	}
+
 	.close-icon {
-		color: #fafafa;
 		width: 4.5rem;
-		margin: 15px;
-		margin-left: 5px;
+		margin: 1.5rem;
+		margin-left: 0.5rem;
 	}
 	ul {
 		position: absolute;
 		top: 9rem;
 		width: max-content;
-		padding: 20px;
-		padding-left: 5px;
+		padding: 2rem;
+		padding-left: 0.5rem;
 		background-color: rgba(15, 16, 16, 0.805);
-		border-radius: 5px;
+		border-radius: 0.5rem;
 	}
 
 	li {
 		list-style: none;
-		margin-top: 8px;
+		margin-top: 0.8rem;
 		transition: all 0.5s;
-		/* tex-shadow 0.7s; */
 	}
 	li:hover {
 		transform: translateX(5px);
+	}
+
+	select {
+		color: var(--color-secondary);
+		background: transparent;
+		padding: 1rem;
+		border: none;
+		outline: none;
+		font-size: 2.1rem;
+		opacity: 1;
+	}
+	select * {
+		background-color: var(--color-primary);
 	}
 
 	@media (min-width: 1440px) {
@@ -213,50 +222,41 @@
 			height: 9rem;
 			padding: 0 10px;
 			background-color: rgba(5, 5, 5, 0.488);
-			border-bottom: 1px solid #eee;
+			border-bottom: 1px solid var(--color-secondary);
 		}
 
 		a {
 			justify-content: baseline;
 			align-items: center;
 			position: relative;
-			color: #d4d2d2;
 			font-size: clamp(16px, 1.5vw, 22px);
 			border: none;
 			transition: all 0.4s;
 		}
-		a span {
-			padding-left: 8px;
-			line-height: 1;
-		}
 		a:hover {
-			color: #fafafa;
-			text-shadow: 5px 5px 15px #fafafa;
+			text-shadow: 5px 5px 15px var(--color-secondary);
+		}
+		a span {
+			padding-left: 0.8rem;
+			line-height: 1;
 		}
 
 		img {
 			position: relative;
 			right: 2rem;
-			height: 75px;
-			width: 75px;
-			border: 1px solid #d4d2d2;
+			height: 7.5rem;
+			width: 7.5rem;
+			border: 1px solid var(--color-secondary);
 			border-radius: 50%;
 			transition: all 0.4s;
 		}
 		img:hover {
 			filter: drop-shadow(0px 0px 10px rgba(249, 248, 248, 0.4));
 		}
-	}
-	select {
-		background: transparent;
-		padding: 1rem;
-		border: none;
-		outline: none;
-		color: #fefdfd;
-		font-size: 2.1rem;
-		opacity: 1;
-	}
-	select * {
-		background-color: black;
+
+		span {
+			padding-left: 0.8rem;
+			word-spacing: -3px;
+		}
 	}
 </style>

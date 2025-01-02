@@ -41,16 +41,18 @@
 		justify-content: center;
 		align-items: center;
 		height: 100vh;
+
+		&:before {
+			content: '';
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background-color: var(--color-primary);
+			opacity: 0.6;
+			z-index: -1;
+		}
 	}
-	header::before {
-		content: '';
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		background-color: #000;
-		opacity: 0.6;
-		z-index: -1;
-	}
+
 	.container {
 		position: absolute;
 		width: 100%;
