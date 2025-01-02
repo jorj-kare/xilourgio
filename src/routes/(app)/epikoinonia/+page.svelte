@@ -82,11 +82,19 @@
 		font-weight: 700;
 		word-spacing: -5px;
 		border-bottom: 1px solid var(--color-secondary);
+		&:lang(en) {
+			word-spacing: normal;
+			font-weight: 400;
+		}
 	}
 	h2 {
 		font-weight: 300;
 		font-size: 2.2rem;
 		word-spacing: -3px;
+		&:lang(en) {
+			word-spacing: normal;
+			font-weight: 400;
+		}
 	}
 	.icon {
 		width: 5rem;

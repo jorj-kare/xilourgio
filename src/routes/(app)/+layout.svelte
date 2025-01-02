@@ -130,7 +130,7 @@
 <footer></footer>
 
 <style>
-	iconify-icon {
+	:global(iconify-icon) {
 		display: inline-block;
 		width: 1em;
 		height: 1em;
@@ -158,8 +158,8 @@
 	}
 	a span {
 		padding-left: 0.8rem;
-		word-spacing: -3px;
 	}
+
 	.icon-btn {
 		border: none;
 		background: transparent;
@@ -205,8 +205,11 @@
 		padding: 1rem;
 		border: none;
 		outline: none;
-		font-size: 2.1rem;
+		font-size: 2rem;
 		opacity: 1;
+		&:lang(en) {
+			font-size: 1.7rem;
+		}
 	}
 	select * {
 		background-color: var(--color-primary);

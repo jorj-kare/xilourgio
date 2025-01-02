@@ -108,6 +108,9 @@
 		word-spacing: -0.5rem;
 		scrollbar-width: none;
 		-ms-overflow-style: none;
+		&:lang(en) {
+			word-spacing: normal;
+		}
 	}
 	header {
 		display: grid;
@@ -142,6 +145,12 @@
 			font-weight: 300;
 			font-size: 4rem;
 			border-bottom: 2px solid var(--color-secondary);
+			&:lang(en) {
+				font-weight: 400;
+			}
+		}
+		&:lang(en) {
+			font-weight: 400;
 		}
 	}
 
@@ -173,6 +182,9 @@
 			font-weight: 700;
 			word-spacing: -6px;
 			border-bottom: 1px solid var(--color-secondary);
+			&:lang(en) {
+				word-spacing: normal;
+			}
 		}
 		& p {
 			padding-top: 0.5rem;

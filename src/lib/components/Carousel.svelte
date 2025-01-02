@@ -39,7 +39,11 @@
 			<button class="btn-right" on:click={() => nextImage()}><FaArrowRight /></button>
 		</div>
 	</figure>
-	<p>{$lng == 'gr' ? images.description : images.descriptionEn}</p>
+	{#if $lng == 'gr'}
+		<p>{images.description}</p>
+	{:else if $lng == 'en' && images.descriptionEn}
+		<p>{images.descriptionEn}</p>
+	{/if}
 </div>
 
 <style>
