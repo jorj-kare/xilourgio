@@ -2,7 +2,9 @@
 	import { PUBLIC_CLOUDINARY_URL } from '$env/static/public';
 	import { page } from '$app/stores';
 	import { lng } from '$stores';
+
 	export let data;
+
 	let productIndex;
 
 	function getIndex(e) {
@@ -34,8 +36,7 @@
 		width: 100%;
 	}
 	h1 {
-		font-weight: 400;
-		word-spacing: -5px;
+		font-weight: 200;
 	}
 
 	.container {
@@ -51,7 +52,7 @@
 		position: relative;
 		width: 100vw;
 		min-height: 100vh;
-		padding: 11rem 4rem;
+		padding: 15rem 4rem;
 		background-image: linear-gradient(
 			155deg,
 			hsl(0deg 0% 0%) 0%,
@@ -87,5 +88,29 @@
 		filter: brightness(60%);
 		transform: scale(1.01);
 		cursor: pointer;
+	}
+
+	/* -------------MEDIA-QUERIES-------------- */
+
+	@media (max-width: 768px) {
+		.container {
+			grid-template-columns: repeat(auto-fill, 28vw);
+			grid-auto-rows: 28vw;
+		}
+
+		h1 {
+			border-bottom: 1px solid var(--color-secondary);
+		}
+	}
+	@media (max-width: 640px) {
+		.container {
+			grid-template-columns: 80vw;
+			grid-auto-rows: 80vw;
+			gap: 3;
+		}
+
+		h1 {
+			font-size: 3rem;
+		}
 	}
 </style>

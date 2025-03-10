@@ -18,7 +18,7 @@
 		if (files) {
 			for (let i = 0; i < files.length; i++) {
 				fileReaderResults[i] = await readFileAsDataURL(files[i]);
-				const markup = `<figure style="width:15vw; height:20vw;"><img src=${fileReaderResults[i]} style="width:100%; height:70%; object-fit:cover;" /><figcaption style="word-break:break-all;">${files[i].name}<figcaption/></figure>`;
+				const markup = `<figure id="figure-preview" ><img id="img-preview" src=${fileReaderResults[i]}  /><figcaption style="word-break:break-all;">${files[i].name}<figcaption/></figure>`;
 				previewImgBox.insertAdjacentHTML('beforeEnd', markup);
 			}
 		}
@@ -28,6 +28,17 @@
 <div class="preview-img-box" bind:this={previewImgBox}></div>
 
 <style>
+	:global(#figure-preview) {
+		width: 15vw;
+		height: max-content;
+		@media (max-width: 768px) {
+		}
+	}
+	:global(#img-preview) {
+		width: 100%;
+		height: 15vw;
+		object-fit: cover;
+	}
 	.preview-img-box {
 		display: flex;
 		gap: 2rem;

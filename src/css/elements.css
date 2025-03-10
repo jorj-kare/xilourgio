@@ -1,13 +1,18 @@
-.btn-submit {
-	border-radius: 1.5rem;
+.btn-submit,
+select,
+input,
+textarea {
 	padding: 1rem;
 	border: 1px solid var(--color-secondary);
+	border-radius: 0.5rem;
 	color: var(--color-secondary);
-	background-color: transparent;
 	outline: transparent;
+}
+.btn-submit {
+	background-color: transparent;
 	transition: all 0.7s;
-
-	&:hover {
+	&:hover,
+	&:active {
 		background-color: var(--color-success);
 		color: var(--color-primary);
 		border-color: var(--color-success);
@@ -16,11 +21,8 @@
 
 .select {
 	background: var(--color-primary);
-	padding: 1rem;
-	border: 1px solid var(--color-secondary);
 	border-radius: 0.5rem;
 	outline: transparent;
-	color: var(--color-secondary);
 	opacity: 1;
 }
 .select * {
@@ -28,10 +30,12 @@
 }
 
 .input {
-	padding: 0.7rem;
-	border: 1px solid var(--color-secondary);
-	border-radius: 0.5rem;
 	background-color: var(--color-primary);
-	color: var(--color-secondary);
-	outline: transparent;
+}
+@media (max-width: 768px) {
+	/* .btn-submit:active {
+		background-color: var(--color-success);
+		color: var(--color-primary);
+		border-color: var(--color-success);
+	} */
 }

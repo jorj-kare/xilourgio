@@ -2,4 +2,4 @@
 	import { lng } from '$stores';
 </script>
 
-{$lng == 'gr' ? ' Κουφώματα' : 'Frames'}
+{$lng == 'gr' ? ' ΚΟΥΦΩΜΑΤΑ' : 'FRAMES'}

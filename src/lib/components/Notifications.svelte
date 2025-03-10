@@ -44,4 +44,12 @@
 	.error {
 		background-color: var(--color-error);
 	}
+	@media (max-width: 640px) {
+		.notification {
+			padding: 1.5rem;
+			padding-right: 3rem;
+			font-size: 1.8rem;
+			min-width: max-content;
+		}
+	}
 </style>

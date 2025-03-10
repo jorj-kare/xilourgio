@@ -43,8 +43,9 @@
 </script>
 
 <Notifications {timeout} />
-<GoBackButton path="/admin" />
-
+<div class="box-go-back-btn">
+	<GoBackButton path="/admin" />
+</div>
 {#if submitting}
 	<div class="spin"><Pulse color="blue"></Pulse></div>
 {/if}
@@ -135,6 +136,7 @@
 		width: 50%;
 		margin-top: 2.5rem;
 		padding: 1.5rem;
+		border-radius: 5px;
 	}
 	input,
 	textarea,
@@ -166,7 +168,7 @@
 			border: none;
 			transition: all 0.5s;
 			&:hover {
-				color: aquamarine;
+				color: var(--color-success);
 			}
 		}
 		& span {
@@ -184,5 +186,51 @@
 	.disabled {
 		opacity: 0.5 !important;
 		pointer-events: none;
+	}
+	.box-go-back-btn {
+		position: absolute;
+		top: 4rem;
+		left: 4rem;
+	}
+	@media (max-width: 992px) {
+		form {
+			padding: 8rem;
+		}
+		input,
+		textarea,
+		select {
+			width: 100%;
+		}
+		button[type='submit'] {
+			width: 100%;
+			align-self: center;
+			margin-top: 5rem;
+		}
+		#sortImgs {
+			flex-wrap: wrap;
+			margin-bottom: 1rem;
+			border-radius: 5px;
+			border: 1px solid var(--color-secondary);
+		}
+		#sortImgs span {
+			word-break: break-all;
+		}
+	}
+	@media (max-width: 768px) {
+		.container {
+			padding: 10rem 5rem;
+		}
+		form {
+			padding: 5rem;
+		}
+		.select {
+			padding-right: 5rem;
+		}
+	}
+	@media (max-width: 640px) {
+		form {
+			border: none;
+			padding: 0;
+		}
 	}
 </style>

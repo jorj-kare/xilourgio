@@ -126,17 +126,14 @@
 		{/each}
 	{/key}
 	{#if showSelect}
-		<button id="orderBtn" on:click={sortProducts}><span>SAVE</span> </button>
+		<button id="order-btn" on:click={sortProducts}><span>SAVE</span> </button>
 	{/if}
 </div>
 
 <style>
 	nav {
-		position: absolute;
 		display: flex;
 		align-items: center;
-		top: 0;
-		left: 0;
 		width: 100%;
 	}
 	#create {
@@ -179,14 +176,15 @@
 
 	.container {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, 15vw);
-		grid-auto-rows: 18vw;
+		grid-template-columns: repeat(auto-fill, 18vw);
+		grid-auto-rows: 21vw;
 		grid-gap: 2rem;
 		justify-items: center;
+		justify-content: center;
 		align-items: center;
 		width: 100vw;
 		min-height: 100vh;
-		padding: 15rem 4rem;
+		padding: 4rem;
 		background-color: var(--color-primary);
 	}
 	.grid-item {
@@ -236,7 +234,7 @@
 		color: var(--color-error);
 	}
 
-	#orderBtn {
+	#order-btn {
 		position: relative;
 		display: flex;
 		align-items: end;
@@ -277,5 +275,68 @@
 	}
 	.select-order * {
 		background-color: var(--color-primary);
+	}
+	@media (max-width: 992px) {
+		.container {
+			grid-template-columns: repeat(auto-fill, 20vw);
+			grid-auto-rows: 22vw;
+		}
+		.anchor-box {
+			padding: 1rem;
+			gap: 2rem;
+		}
+	}
+	@media (max-width: 768px) {
+		.container {
+			grid-template-columns: repeat(auto-fill, 25vw);
+			grid-auto-rows: 28vw;
+		}
+		nav {
+			justify-content: center;
+		}
+		#order-btn {
+			width: 15rem;
+			height: 12rem;
+			font-weight: 400;
+		}
+		#order-btn span {
+			padding: 2.5rem 1.8rem;
+			bottom: -0.2rem;
+		}
+	}
+	@media (max-width: 640px) {
+		.container {
+			grid-template-columns: repeat(auto-fill, 35vw);
+			grid-auto-rows: 38vw;
+		}
+		nav {
+			flex-direction: column;
+			gap: 2rem;
+			padding-top: 4rem;
+		}
+
+		#create {
+			display: block;
+			width: max-content;
+			height: auto;
+			margin: 0rem;
+			padding: 1rem 5rem;
+			border-radius: 5px;
+			font-weight: 300;
+		}
+		#create:hover {
+			background-color: initial;
+			color: initial;
+		}
+		#create a {
+			opacity: 0;
+			width: 100%;
+		}
+		.anchor-box {
+			gap: 1rem;
+		}
+		.select-order {
+			font-size: 1.8rem;
+		}
 	}
 </style>

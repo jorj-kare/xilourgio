@@ -26,6 +26,7 @@
 		justify-content: center;
 		align-items: center;
 		height: 100vh;
+		width: 100vw;
 		background-color: var(--color-primary);
 	}
 	form {
@@ -39,5 +40,13 @@
 
 	button {
 		margin-top: 1.5rem;
+	}
+	@media (max-width: 640px) {
+		form {
+			width: 80%;
+		}
+		input {
+			margin-bottom: 2rem;
+		}
 	}
 </style>

@@ -1,116 +1,108 @@
 <script>
-	import video from '$lib/media/166808-835670743.mp4';
 	import { onMount } from 'svelte';
-	import AnimateHeader from '$lib/components/AnimateHeader.svelte';
+	import Carousel_2 from '$lib/components/Carousel_2.svelte';
+	import Contact from '../../lib/components/Contact.svelte';
+	import Icon from '@iconify/svelte';
 	import { lng, mainHeader, secondaryHeader } from '$stores';
+	import carouselImg1 from '$lib/media/carousel-1/benjamin-sow-64TjoOAj61w-unsplash.jpg';
+	import carouselImg2 from '$lib/media/carousel-1/khanh-do-bPUECAYreos-unsplash.jpg';
+	import carouselImg3 from '$lib/media/carousel-1/sanju-pandita-5BIcH2kzlEU-unsplash.jpg';
+	import carousel2Img1 from '$lib/media/carousel-2/austin-ramsey-nmXi-HCD_F8-unsplash.jpg';
+	import carousel2Img2 from '$lib/media/carousel-2/dominik-scythe-3cIvvzjE6Lk-unsplash.jpg';
+	import carousel2Img3 from '$lib/media/carousel-2/paul-trienekens-mLO6ILUbADA-unsplash.jpg';
+	import imgWood4 from '$lib/media/stanislav-churikov-R-dqzxCYgOM-unsplash.jpg';
+	import imgWood5 from '$lib/media/clem-onojeghuo-hdW4rZPHe2g-unsplash.jpg';
+	import video from '$lib/media/166808-835670743.mp4';
 
-	const imgArr = [
-		'https://res.cloudinary.com/dqn25bn8q/image/upload/v1727470059/xilourgio/56dBO1Niw2nQIQYTRukrk.jpg',
-		'https://res.cloudinary.com/dqn25bn8q/image/upload/v1727469634/xilourgio/8DEnGdTULgwPTiyaU3y-b.jpg',
-		'https://res.cloudinary.com/dqn25bn8q/image/upload/v1727469634/xilourgio/2qD__zLmvqeRN6eMyAZLa.jpg'
+	let innerWidth;
+	const imgArr = [carousel2Img1, carousel2Img2, carousel2Img3];
+	const images = [carouselImg1, carouselImg2, carouselImg3];
+	const infoImg = [imgWood5, '', imgWood4];
+	const infoIcon = [
+		'fluent-emoji-high-contrast:hammer-and-pick',
+		'academicons:ideas-repec',
+		'file-icons:renovate'
 	];
+
 	onMount(() => {
-		const videoEl = document.querySelector('video');
-		videoEl.addEventListener('timeupdate', function () {
-			if (this.currentTime >= 8) {
-				this.currentTime = 0.0;
-			}
-		});
+		if (innerWidth > 768) {
+			const videoEl = document.querySelector('video');
+			if (videoEl)
+				videoEl.addEventListener('timeupdate', function () {
+					if (this.currentTime >= 8) {
+						this.currentTime = 0.0;
+					}
+				});
+		}
 	});
 </script>
 
+<svelte:window bind:innerWidth />
 <div class="container">
 	<header>
-		<video playsinline autoplay muted loop preload="true" poster={imgArr[0]}>
-			<source src={video} type="video/webm" />
-			Your browser does not support the video tag.
-		</video>
-		<div class="title-box">
-			<h1>{$lng == 'gr' ? $mainHeader.title.gr : $mainHeader.title.en}</h1>
-			<p>
-				{$lng == 'gr' ? $mainHeader.text.gr : $mainHeader.text.en}
-			</p>
-		</div>
+		{#if innerWidth > 768}
+			<video playsinline autoplay muted loop preload="true" poster={images[2]}>
+				<source src={video} type="video/webm" />
+				Your browser does not support the video tag.
+			</video>
+			<div class="title-box">
+				<h1>{$lng == 'gr' ? $mainHeader.title.gr : $mainHeader.title.en}</h1>
+				<p>
+					{$lng == 'gr' ? $mainHeader.text.gr : $mainHeader.text.en}
+				</p>
+			</div>
+		{:else}
+			<div class="background-img">
+				<Carousel_2 {images} autoplay={true} indicators={true} arrows={true} />
+			</div>
+			<div class="title-box">
+				<p>
+					{$lng == 'gr' ? $mainHeader.text.gr : $mainHeader.text.en}
+				</p>
+			</div>
+		{/if}
 	</header>
-	<section>
-		<AnimateHeader imgPathArr={imgArr}>
-			<div class="info">
-				<div>
-					<h2>
-						{$lng == 'gr' ? $secondaryHeader.column1.title.gr : $secondaryHeader.column1.title.en}
-					</h2>
-					<ul>
-						<li>
-							{$lng == 'gr'
-								? $secondaryHeader.column1.text.p1.gr
-								: $secondaryHeader.column1.text.p1.en}
-						</li>
-						<li>
-							{$lng == 'gr'
-								? $secondaryHeader.column1.text.p2.gr
-								: $secondaryHeader.column1.text.p2.en}
-						</li>
-					</ul>
-					<p>
-						{$lng == 'gr'
-							? $secondaryHeader.column1.text.p3.gr
-							: $secondaryHeader.column1.text.p3.en}
-					</p>
-				</div>
 
+	{#each infoIcon as icon, i}
+		<section>
+			<div class={`carousel-box  carousel-box--${i + 1}`}>
+				{#if i == 1}<Carousel_2 images={imgArr} autoplay={true} indicators={true} sec={3000} />
+				{:else}
+					<img src={infoImg[i]} alt="" />
+				{/if}
+			</div>
+			<div class={`info info--${i + 1}`}>
+				<Icon {icon} />
+				<h1>
+					{$lng == 'gr'
+						? $secondaryHeader[`column${i + 1}`]?.title.gr
+						: $secondaryHeader[`column${i + 1}`]?.title.en}
+				</h1>
 				<div>
-					<h2>
-						{$lng == 'gr' ? $secondaryHeader.column2.title.gr : $secondaryHeader.column2.title.en}
-					</h2>
-					<ul>
-						<li>
+					{#each Array(3) as _, j}
+						<p>
 							{$lng == 'gr'
-								? $secondaryHeader.column2.text.p1.gr
-								: $secondaryHeader.column2.text.p1.en}
-						</li>
-						<li>
-							{$lng == 'gr'
-								? $secondaryHeader.column2.text.p2.gr
-								: $secondaryHeader.column2.text.p2.en}
-						</li>
-						<li>
-							{$lng == 'gr'
-								? $secondaryHeader.column2.text.p3.gr
-								: $secondaryHeader.column2.text.p3.en}
-						</li>
-					</ul>
-				</div>
-				<div>
-					<h2>
-						{$lng == 'gr' ? $secondaryHeader.column3.title.gr : $secondaryHeader.column3.title.en}
-					</h2>
-					<p>
-						{$lng == 'gr'
-							? $secondaryHeader.column3.text.p1.gr
-							: $secondaryHeader.column3.text.p1.en}
-					</p>
-					<p>
-						{$lng == 'gr'
-							? $secondaryHeader.column3.text.p2.gr
-							: $secondaryHeader.column3.text.p2.en}
-					</p>
+								? $secondaryHeader[`column${i + 1}`].text[`p${j + 1}`]?.gr
+								: $secondaryHeader[`column${i + 1}`].text[`p${j + 1}`]?.en}
+						</p>
+					{/each}
 				</div>
 			</div>
-		</AnimateHeader>
-	</section>
+		</section>
+	{/each}
+	<footer class="footer">
+		<Contact />
+	</footer>
 </div>
 
 <style>
 	.container {
-		scroll-snap-type: y mandatory;
 		height: 100vh;
+		scroll-snap-type: y mandatory;
 		overflow-y: scroll;
-		word-spacing: -0.5rem;
 		scrollbar-width: none;
 		-ms-overflow-style: none;
-		&:lang(en) {
-			word-spacing: normal;
-		}
+		overflow-x: hidden;
 	}
 	header {
 		display: grid;
@@ -118,7 +110,7 @@
 		align-items: flex-end;
 		justify-content: start;
 		height: 100%;
-		width: 100vw;
+		width: 100%;
 		scroll-snap-align: start;
 	}
 
@@ -130,68 +122,235 @@
 		object-fit: cover;
 		filter: brightness(60%);
 	}
+
 	.title-box {
 		grid-column: 1/2;
 		grid-row: 1/2;
 		width: 100%;
 		padding: 2rem;
 		margin-left: 3rem;
-		margin-bottom: 50px;
+		margin-bottom: 5rem;
 		border-radius: 0.5rem;
 		font-weight: 300;
-		font-size: 2rem;
+		font-size: 2.2rem;
 		z-index: 10;
 		& h1 {
-			font-weight: 300;
-			font-size: 4rem;
+			margin-bottom: 3px;
+			font-weight: 900;
+			font-size: 5rem;
 			border-bottom: 2px solid var(--color-secondary);
-			&:lang(en) {
-				font-weight: 400;
-			}
-		}
-		&:lang(en) {
-			font-weight: 400;
 		}
 	}
 
-	section {
+	section,
+	footer {
 		position: relative;
+		display: grid;
+		grid-template-columns: 35% 1fr;
+		grid-auto-rows: 100%;
+		width: 100vw;
+		height: 100vh;
+		scroll-snap-align: center;
+		scroll-snap-stop: always;
 		z-index: 11;
+	}
+	.carousel-box {
+		background-color: var(--color-primary);
+		grid-row: 1/-1;
+	}
+	.carousel-box--1 {
+		grid-column: 1/2;
+	}
+	.carousel-box--2 {
+		grid-column: 2/3;
+	}
+	.carousel-box--3 {
+		grid-column: 1/2;
+	}
+
+	.carousel-box img {
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
 	}
 	.info {
+		grid-row: 1/-1;
 		display: flex;
-		grid-template-columns: 1fr 1fr 1fr;
-		align-items: flex-end;
-		align-content: end;
-		gap: 4rem;
-		padding: 3rem;
-		height: 100vh;
-		border-top: 2px solid var(--color-secondary);
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-position: center;
-		scroll-snap-align: start;
-		z-index: 11;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 4rem;
+		border-left: 3px solid var(--color-secondary);
+		background-color: var(--color-primary);
+		color: var(--color-secondary);
+		font-size: 2.2rem;
+		font-weight: 200;
+	}
+	.info h1 {
+		margin-bottom: 2rem;
+		text-align: center;
+		font-size: 3.5rem;
+		font-weight: 400;
+	}
 
-		& div {
-			font-size: 2rem;
-			padding: 1.5rem;
-		}
-		& h2 {
-			font-size: 3rem;
-			font-weight: 700;
-			word-spacing: -6px;
-			border-bottom: 1px solid var(--color-secondary);
-			&:lang(en) {
-				word-spacing: normal;
-			}
-		}
-		& p {
-			padding-top: 0.5rem;
+	.info p {
+		max-width: 60ch;
+		padding-bottom: 1.5rem;
+	}
+	.info--1 {
+		grid-column: 2/3;
+	}
+	.info--2 {
+		grid-column: 1/2;
+	}
+	.info--3 {
+		grid-column: 2/3;
+	}
+	.info--3 p:last-child {
+		display: none;
+	}
+	:global(.info svg) {
+		align-self: center;
+		height: 70px;
+		width: 70px;
+		padding: 5px;
+		border: 2px solid var(--color-secondary);
+		border-radius: 50%;
+		flex-shrink: 0;
+	}
+
+	/* -------------MEDIA-QUERIES-------------- */
+	@media (min-width: 1601px) {
+		.title-box {
+			margin-bottom: 3rem;
 		}
 	}
 
-	ul {
-		padding: 1rem;
+	@media (max-width: 992px) {
+		header {
+			display: grid;
+			grid-template-columns: 65% 1fr;
+		}
+		.info {
+			align-items: start;
+		}
+		.info h1 {
+			text-align: start;
+		}
+		.title-box h1 {
+			line-height: 6rem;
+			padding-bottom: 1rem;
+		}
+	}
+	@media (max-width: 768px) {
+		.container {
+			scroll-snap-type: none;
+			height: auto;
+		}
+		header {
+			grid-template-rows: 80vh max-content;
+			margin-top: 12rem;
+			height: 100%;
+		}
+		.background-img {
+			grid-column: 1/-1;
+			grid-row: 1/2;
+			width: 100%;
+			height: 100%;
+		}
+
+		.title-box {
+			grid-column: 1/-1;
+			grid-row: 2/3;
+			justify-items: center;
+			width: 100%;
+			height: 100%;
+			padding: 4rem 3rem;
+			margin: 0;
+			border-top: 1px solid var(--color-secondary);
+			border-radius: 0;
+			background-color: var(--color-primary);
+			font-size: 2.2rem;
+			font-weight: 200;
+		}
+		.title-box p {
+			max-width: 60rem;
+		}
+
+		section,
+		footer {
+			display: block;
+			height: max-content;
+		}
+
+		.carousel-box {
+			height: 50vh;
+		}
+		.carousel-box--2 {
+			height: 70vh;
+		}
+		.carousel-box--3 {
+			height: 40vh;
+		}
+
+		.carousel-box img {
+			height: 100%;
+			width: 100%;
+			object-fit: cover;
+		}
+		.info {
+			border: none;
+			border-top: 1px solid var(--color-secondary);
+			align-items: center;
+			padding: 5rem;
+			font-size: 2.2rem;
+			height: max-content;
+		}
+		.info h1 {
+			padding-block: 1rem;
+			text-align: center;
+			font-size: 3rem;
+			font-weight: 300;
+		}
+		.info p {
+			padding-bottom: 1.5rem;
+			max-width: 60rem;
+		}
+
+		:global(.info svg) {
+			height: 60px;
+			width: 60px;
+			padding: 5px;
+			border: 2px solid var(--color-secondary);
+			border-radius: 50%;
+			flex-shrink: 0;
+		}
+	}
+	@media (max-width: 640px) {
+		.title-box {
+			font-size: 2rem;
+		}
+		.info {
+			padding: 5rem 3rem;
+			font-size: 2rem;
+		}
+		.info h1 {
+			font-size: 2.8rem;
+			font-weight: 300;
+			margin-bottom: 1rem;
+		}
+		.info p {
+			padding-bottom: 0.8rem;
+		}
+		.carousel-box {
+			height: 30vh;
+		}
+		.carousel-box--2 {
+			height: 50vh;
+		}
+		:global(.info svg) {
+			height: 55px;
+			width: 55px;
+		}
 	}
 </style>

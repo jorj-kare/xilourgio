@@ -111,7 +111,9 @@
 </script>
 
 <Notifications {timeout} />
-<GoBackButton path="/admin"></GoBackButton>
+<div class="box-go-back-btn">
+	<GoBackButton path="/admin"></GoBackButton>
+</div>
 
 {#if submitting}
 	<div class="spin"><Pulse color="blue"></Pulse></div>
@@ -192,7 +194,7 @@
 								title={data.products.description}
 							/>
 
-							<select class="selectOrder" bind:value={selectEl[index]}>
+							<select class="select-order" bind:value={selectEl[index]}>
 								{#each orderedImgs as path, i (i)}
 									<option value={i} selected={i == index ? true : false}>{i + 1}</option>
 								{/each}
@@ -222,13 +224,13 @@
 	form {
 		display: flex;
 		flex-direction: column;
-		gap: 1px;
-		max-height: 90%;
-		padding: 1rem;
 	}
 	fieldset {
 		display: flex;
 		flex-direction: column;
+		margin-bottom: 5rem;
+		padding: 5rem;
+		border-radius: 5px;
 	}
 	legend {
 		font-size: 3rem;
@@ -241,7 +243,7 @@
 	select,
 	textarea,
 	button {
-		max-width: 30%;
+		width: 50%;
 	}
 	button {
 		margin: 4rem 0;
@@ -289,10 +291,11 @@
 			color: var(--color-error);
 		}
 	}
-	.selectOrder {
+	.select-order {
 		position: absolute;
 		top: 1rem;
 		left: 0.5rem;
+		width: max-content;
 		padding: 1rem 0;
 		border: transparent;
 		border-radius: 0.5rem;
@@ -327,5 +330,53 @@
 	.submitting {
 		opacity: 0.5;
 		pointer-events: none;
+	}
+	.box-go-back-btn {
+		position: absolute;
+		top: 4rem;
+		left: 4rem;
+	}
+
+	@media (max-width: 992px) {
+		fieldset {
+			padding: 3rem 8rem;
+		}
+		input,
+		textarea,
+		select {
+			width: 100%;
+		}
+		.btn-submit {
+			width: 100%;
+			align-self: center;
+		}
+		.deleteImg {
+			width: 4rem;
+		}
+		.select-order {
+			padding: 0;
+		}
+		.image-box {
+			grid-template-columns: repeat(auto-fill, 15vw);
+			grid-auto-rows: 15vw;
+		}
+	}
+	@media (max-width: 768px) {
+		fieldset {
+			margin-bottom: 5rem;
+			padding: 5rem;
+		}
+	}
+	@media (max-width: 640px) {
+		.form-box {
+			padding: 10rem 3rem;
+		}
+		fieldset {
+			padding: 5rem 3rem;
+		}
+		.image-box {
+			grid-template-columns: repeat(auto-fill, 20vw);
+			grid-auto-rows: 20vw;
+		}
 	}
 </style>

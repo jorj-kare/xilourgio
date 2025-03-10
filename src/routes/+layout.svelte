@@ -18,8 +18,10 @@
 <style>
 	:global(body:lang(en)) {
 		font-family: 'Lato', serif;
+		font-family: 'Murecho', serif;
 	}
 	:global(body:lang(gr)) {
 		font-family: 'Ubuntu Mono', monospace;
+		font-family: 'Murecho', serif;
 	}
 </style>

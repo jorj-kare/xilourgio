@@ -1,96 +1,96 @@
 <script>
-	import { PUBLIC_CLOUDINARY_URL } from '$env/static/public';
-	import IoIosClose from 'svelte-icons/io/IoIosClose.svelte';
 	import { fade } from 'svelte/transition';
+	import { PUBLIC_CLOUDINARY_URL } from '$env/static/public';
+	import { lng } from '$stores';
 	import FaArrowRight from 'svelte-icons/fa/FaArrowRight.svelte';
 	import FaArrowLeft from 'svelte-icons/fa/FaArrowLeft.svelte';
-	import { lng } from '$stores';
+
 	export let images;
+	export let indicators = false;
+	export let path = '/';
 
 	let currentSlideItem = 0;
-	const nextImage = () => {
+	function nextImage() {
 		currentSlideItem = (currentSlideItem + 1) % images.pictures.length;
-	};
-	const prevImage = () => {
+	}
+
+	function prevImage() {
 		if (currentSlideItem != 0) {
 			currentSlideItem = (currentSlideItem - 1) % images.pictures.length;
 		} else {
 			currentSlideItem = images.pictures.length - 1;
 		}
-	};
+	}
+
+	function changeImg(i) {
+		currentSlideItem = i;
+	}
 </script>
 
-<div class="box">
-	<figure transition:fade={{ duration: 150 }}>
-		{#each [images.pictures[currentSlideItem]] as item (currentSlideItem)}
-			<button class="close-icon" on:click>
-				<IoIosClose></IoIosClose>
-			</button>
-			<img
-				in:fade={{ duration: 1000 }}
-				src={PUBLIC_CLOUDINARY_URL + item}
-				alt={$lng == 'gr' ? images.description : images.descriptionEn}
-				width={1000}
-				height={600}
-			/>
-		{/each}
-		<div class="carousel-buttons">
-			<button class="btn-left" on:click={() => prevImage()}><FaArrowLeft /></button>
-			<button class="btn-right" on:click={() => nextImage()}><FaArrowRight /></button>
+<figure transition:fade={{ duration: 150 }}>
+	<div class="box-go-back-btn">
+		<a href={path}>X</a>
+	</div>
+	{#each [images.pictures[currentSlideItem]] as item (currentSlideItem)}
+		<img
+			in:fade={{ duration: 1000 }}
+			src={PUBLIC_CLOUDINARY_URL + item}
+			alt={$lng == 'gr' ? images.description : images.descriptionEn}
+			width={1000}
+			height={600}
+		/>
+	{/each}
+	{#if indicators}
+		<div class="box-indicators">
+			{#each images.pictures as img, i}
+				<button
+					on:click={() => changeImg(i)}
+					class:current={i == currentSlideItem}
+					class="indicator"
+				></button>
+			{/each}
 		</div>
-	</figure>
+	{/if}
+	<div class="carousel-buttons">
+		<button class="btn-left" on:click={() => prevImage()}><FaArrowLeft /></button>
+		<button class="btn-right" on:click={() => nextImage()}><FaArrowRight /></button>
+	</div>
 	{#if $lng == 'gr'}
 		<p>{images.description}</p>
 	{:else if $lng == 'en' && images.descriptionEn}
 		<p>{images.descriptionEn}</p>
 	{/if}
-</div>
+</figure>
 
 <style>
-	.box {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		width: 100vw;
-		min-height: 100vh;
-		background-color: var(--color-primary);
-	}
 	figure {
-		position: relative;
 		display: grid;
-		grid-template-columns: 1fr 4rem;
-		grid-template-rows: auto auto;
+		grid-template-columns: 100%;
+		grid-template-rows: repeat(3, auto) max-content 8rem;
 		align-items: center;
 		justify-content: center;
-		height: 85vh;
-		width: 65vw;
-		margin-top: 1.5rem;
-		border-radius: 1.5rem;
-		border: 3px solid var(color-secondary);
+		height: 100vh;
+		width: 100vw;
+		background-color: var(--color-primary);
 	}
 
 	img {
 		grid-column: 1/2;
-		grid-row: 1/2;
-		width: 100%;
+		grid-row: 2/4;
+		justify-self: center;
+		width: 80%;
 		height: 100%;
-		padding-top: 5rem;
-		padding-left: 1.5rem;
 		object-fit: contain;
 		overflow: hidden;
 	}
 
-	p {
-		padding: 1rem 2rem;
-		max-width: 120ch;
-		margin-top: 0.5rem;
-	}
 	.carousel-buttons {
-		grid-row: 2/3;
+		grid-row: 4/5;
 		grid-column: 1/2;
 		justify-self: center;
 		align-self: center;
+		display: flex;
+		gap: 3rem;
 	}
 	button {
 		width: 5rem;
@@ -99,7 +99,6 @@
 		color: var(--color-secondary);
 		background-color: transparent;
 		border: none;
-		border-radius: 50%;
 		transition: all 0.5s;
 	}
 	.btn-right:hover {
@@ -110,22 +109,75 @@
 		transform: translateX(-3px);
 		color: var(--color-success);
 	}
-	.close-icon {
-		grid-column: 2/3;
+	p {
+		grid-row: 5/6;
+		max-width: 120ch;
+		justify-self: center;
+		font-size: 2rem;
+		font-weight: 200;
+		padding-bottom: 2rem;
+	}
+	.box-go-back-btn {
+		grid-column: 1/2;
 		grid-row: 1/2;
+		margin: 4rem;
+		& a {
+			text-decoration: none;
+			font-size: 2.5rem;
+			font-weight: 300;
+			-webkit-tap-highlight-color: transparent;
+			transition: all 0.5s;
+			&:hover {
+				color: var(--color-error);
+			}
+		}
+	}
+
+	.box-indicators {
+		grid-column: 1/2;
+		grid-row: 3/4;
+		justify-self: center;
 		align-self: flex-start;
-		justify-self: end;
-		width: 5.5rem;
-		height: auto;
-		margin: 0.5rem;
-		background-color: transparent;
-		border: none;
-		outline: none;
-		color: var(--color-secondary);
-		transition: all 0.5s;
-		&:hover {
-			transform: rotate(180deg);
-			color: var(--color-error);
+		display: flex;
+		color: var(--color-primary);
+		z-index: 10;
+		gap: 3rem;
+	}
+	.indicator {
+		width: 1.5rem;
+		height: 1.5rem;
+		border-radius: 100%;
+		background-color: var(--color-secondary);
+	}
+	.current {
+		background-color: rgba(5, 5, 5, 0.488);
+	}
+	@media (max-width: 992px) {
+		.carousel-buttons {
+			align-self: flex-start;
+		}
+		img {
+			width: 90%;
+		}
+		.box-go-back-btn {
+			margin: none;
+			margin-left: 3rem;
+		}
+	}
+	@media (max-width: 640px) {
+		figure {
+			grid-template-rows: 10rem repeat(2, auto) max-content 8rem;
+		}
+		img {
+			width: 95%;
+		}
+		p {
+			padding-inline: 1rem;
+			text-align: center;
+			padding-bottom: 4rem;
+		}
+		.box-go-back-btn {
+			margin: 2rem;
 		}
 	}
 </style>

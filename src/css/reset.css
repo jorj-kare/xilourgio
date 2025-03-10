@@ -1,6 +1,9 @@
 /* -------RESET STYLES-----------*/
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chango&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Murecho:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oi&display=swap');
 @import '../css/variables.css';
 
 *,
@@ -13,9 +16,12 @@
 	margin: 0;
 }
 html {
+	/* 6.25 */
 	font-size: 62.5%;
+
 	scroll-behavior: smooth;
 }
+
 html,
 body {
 	overflow-x: hidden;
@@ -27,6 +33,9 @@ body {
 	color: var(--color-secondary);
 	font-size: 1.6rem;
 	line-height: 1.5;
+	font-family: 'Murecho', serif;
+	font-optical-sizing: auto;
+	font-style: normal;
 }
 
 img,
@@ -48,6 +57,11 @@ a {
 	color: var(--color-secondary);
 }
 
+a:active {
+	-webkit-tap-highlight-color: transparent !important;
+	outline: none !important;
+}
+
 p,
 h1,
 h2,
@@ -61,4 +75,21 @@ h6 {
 #root,
 #__next {
 	isolation: isolate;
+}
+@media (min-width: 1601px) {
+	html {
+		font-size: 75%;
+	}
+}
+@media (max-width: 1280px) {
+	html {
+		font-size: 56.25%;
+	}
+}
+@media (max-width: 1024px) {
+	html {
+	}
+}
+
+@media (max-width: 992px) {
 }
