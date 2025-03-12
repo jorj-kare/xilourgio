@@ -141,10 +141,4 @@
 		border-radius: 50%;
 		font-size: 2rem;
 	}
-
-	@media (max-width: 640px) {
-		img {
-			object-fit: contain;
-		}
-	}
 </style>

@@ -374,6 +374,10 @@
 		fieldset {
 			padding: 5rem 3rem;
 		}
+		legend {
+			font-size: 2.5rem;
+			white-space: no-wrap;
+		}
 		.image-box {
 			grid-template-columns: repeat(auto-fill, 20vw);
 			grid-auto-rows: 20vw;
